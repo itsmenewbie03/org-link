@@ -1,5 +1,5 @@
 # OrgLink
-> Description will be here IDK what to write...
+> Attendance system for Student Body Organization in universities. (I think xD) 
 # Why?
 > As usual we will fail if we don't make this xD
 # Setup
@@ -7,6 +7,6 @@
 - `composer install`
 - `npm i`
 # Running
-> To run this project open to terminals and run
+> To run this project open two terminals and run
 - `php artisan serve`
 - `npm run dev`
