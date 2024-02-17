@@ -1,12 +1,27 @@
 # OrgLink
-> Attendance system for Student Body Organization in universities. (I think xD) 
+
+> OrgLink - A Feature-rich Multitenant Attendance System for Student Body Organization in universities.
+
 # Why?
+
 > As usual we will fail if we don't make this xD
-# Setup
-> This will be required to run the project for the first time
-- `composer install`
-- `npm i`
+
+# Getting Started
+
+> Configure the .env file see sample [here](https://github.com/platformsh-templates/laravel/blob/master/.env.example)
+
+> Run the following scripts
+
+-   `composer install`
+-   `npm i`
+
+> Check if datebase is configured correctly in the .env file
+
+-   `php artisan migrate:fresh`
+
 # Running
+
 > To run this project open two terminals and run
-- `php artisan serve`
-- `npm run dev`
+
+-   `php artisan serve`
+-   `npm run dev`
