@@ -1,14 +1,27 @@
 <script>
-    export let user;
+    import { inertia } from "@inertiajs/svelte";
+    let username;
 </script>
 
 <svelte:head>
-    <title>Welcome, {user}</title>
+    <title>Login | OrgLink</title>
 </svelte:head>
 <h1 class="text-blue-500 text-3xl text-center">Welcome</h1>
-<p class="text-2xl text-center">
-    Hello {user}, welcome to your first Inertia app!
-</p>
-<div class="w-full flex justify-center mt-2">
-    <button class="btn btn-primary w-1/2">I am a useless buttton.</button>
+<p class="text-2xl text-center">Hello, welcome to OrgLink!</p>
+<div class="w-full flex flex-col items-center mt-2">
+    <input
+        class="input input-bordered w-1/2"
+        type="text"
+        placeholder="Username"
+        bind:value={username}
+    />
+    <!-- NOTE: what you see here isn't magic xD -->
+    <button
+        use:inertia={{
+            method: "post",
+            data: { user: username },
+            href: "/user/show",
+        }}
+        class="btn btn-primary w-1/2 mt-2">Login</button
+    >
 </div>
