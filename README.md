@@ -1,8 +1,6 @@
 # OrgLink
-OrgLink - A Feature-rich Multitenant Attendance System for Student Body Organization in universities.
 
-# Why?
-As usual we will fail if we don't make this xD
+OrgLink - A Feature-rich Multitenant Attendance System for Student Body Organization in universities.
 
 # Getting Started
 
@@ -23,3 +21,7 @@ To run this project open two terminals and run
 
 -   `php artisan serve`
 -   `npm run dev`
+
+# Why?
+
+As usual we will fail if we don't make this xD
