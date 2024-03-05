@@ -2,6 +2,10 @@
 
 OrgLink - A Feature-rich Multitenant Attendance System for Student Body Organization in universities.
 
+> [!IMPORTANT]
+> deez
+> nuts
+
 # Getting Started
 
 Configure the .env file see sample [here](https://github.com/platformsh-templates/laravel/blob/master/.env.example)
