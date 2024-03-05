@@ -2,9 +2,11 @@
 
 OrgLink - A Feature-rich Multitenant Attendance System for Student Body Organization in universities.
 
-> [!IMPORTANT]
-> deez
-> nuts
+# Nah I'd win
+
+> [!CAUTION]
+> This branch is a mark to remind me that I messed up badly by hastily deciding the we should use svelte
+> _Massive Skill Issue_ in my end.
 
 # Getting Started
 
