@@ -1,12 +1,12 @@
-# OrgLink
-
-OrgLink - A Feature-rich Multitenant Attendance System for Student Body Organization in universities.
-
 # Nah I'd win
 
 > [!CAUTION]
-> This branch is a mark to remind me that I messed up badly by hastily deciding the we should use svelte
-> _Massive Skill Issue_ in my end.
+> This branch is a mark to remind me that I messed up badly by hastily deciding the we should use svelte.
+> **Massive Skill Issue** on my end.
+
+# OrgLink
+
+OrgLink - A Feature-rich Multitenant Attendance System for Student Body Organization in universities.
 
 # Getting Started
 
