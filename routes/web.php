@@ -1,9 +1,6 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +14,5 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Home', ['user' => '@itsmenewbie03']);
-});
-
-Route::controller(UserController::class)->group(function () {
-    Route::get("/user", 'index');
-    Route::post("user/show", 'show');
+    return view('welcome');
 });
