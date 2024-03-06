@@ -8,33 +8,66 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased">
-    <x-mary-toast />
-    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-        <livewire:layout.navigation />
+<body class="min-h-screen font-sans antialiased bg-base-200/50 dark:bg-base-200">
 
-        <!-- Page Heading -->
-        @if (isset($header))
-        <header class="bg-white dark:bg-gray-800 shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $header }}
+    {{-- NAVBAR mobile only --}}
+    <x-mary-nav sticky class="lg:hidden">
+        <x-slot:brand class="flex gap-2 items-center">
+            <x-mary-icon name="o-square-3-stack-3d" class="text-primary" />
+            <div>{{config("app.name","Laravel")}}</div>
+        </x-slot:brand>
+        <x-slot:actions>
+            <label for="main-drawer" class="lg:hidden mr-3">
+                <x-mary-icon name="o-bars-3" class="cursor-pointer" />
+            </label>
+        </x-slot:actions>
+    </x-mary-nav>
+
+    {{-- MAIN --}}
+    <x-mary-main full-width>
+        {{-- SIDEBAR --}}
+        <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-100 lg:bg-inherit">
+
+            {{-- BRAND --}}
+            <div class="p-6 pt-3 flex gap-3 items-center h-20">
+                <x-mary-icon name="o-academic-cap" class="text-primary" />
+                <div class="hidden-when-collapsed">{{config("app.name","Laravel")}}</div>
             </div>
-        </header>
-        @endif
 
-        <!-- Page Content -->
-        <main>
+            {{-- MENU --}}
+            <x-mary-menu activate-by-route>
+
+                {{-- User --}}
+                @if($user = auth()->user())
+                <x-mary-list-item :item="$user" sub-value="username" no-separator no-hover class="!-mx-2 mt-2 mb-5 border-y border-y-sky-900">
+                    <x-slot:actions>
+                        <livewire:logout-btn />
+                    </x-slot:actions>
+                </x-mary-list-item>
+                @endif
+
+                <x-mary-menu-item title="Hello" icon="o-sparkles" link="/" />
+                <x-mary-menu-sub title="Settings" icon="o-cog-6-tooth">
+                    <x-mary-menu-item title="Wifi" icon="o-wifi" link="####" />
+                    <x-mary-menu-item title="Archives" icon="o-archive-box" link="####" />
+                </x-mary-menu-sub>
+            </x-mary-menu>
+        </x-slot:sidebar>
+
+        {{-- The `$slot` goes here --}}
+        <x-slot:content>
             {{ $slot }}
-        </main>
-    </div>
+        </x-slot:content>
+    </x-mary-main>
+
+    {{-- TOAST area --}}
+    <x-mary-toast />
 </body>
+
+</html>
 
 </html>
