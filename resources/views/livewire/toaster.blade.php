@@ -3,16 +3,15 @@
 use Livewire\Volt\Component;
 use Mary\Traits\Toast;
 
-new class() extends Component
-{
+new class extends Component {
     use Toast;
-    public $whatever = "no one care ackshually";
-    public $name = "";
+    public $whatever = 'no one care ackshually';
+    public $name = '';
 
     public function toast_deez_nuts()
     {
         sleep(1);
-        $this->success("Hello, " . $this->name . "👋");
+        $this->success($this->whatever);
     }
 }; ?>
 

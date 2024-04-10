@@ -18,7 +18,7 @@
     <x-mary-nav sticky class="lg:hidden">
         <x-slot:brand class="flex gap-2 items-center">
             <x-mary-icon name="o-square-3-stack-3d" class="text-primary" />
-            <div>{{config("app.name","Laravel")}}</div>
+            <div>{{ config('app.name', 'Laravel') }}</div>
         </x-slot:brand>
         <x-slot:actions>
             <label for="main-drawer" class="lg:hidden mr-3">
@@ -35,26 +35,28 @@
             {{-- BRAND --}}
             <div class="p-6 pt-3 flex gap-3 items-center h-20">
                 <x-mary-icon name="o-academic-cap" class="text-primary" />
-                <div class="hidden-when-collapsed">{{config("app.name","Laravel")}}</div>
+                <div class="hidden-when-collapsed">{{ config('app.name', 'Laravel') }}</div>
             </div>
 
             {{-- MENU --}}
             <x-mary-menu activate-by-route>
 
                 {{-- User --}}
-                @if($user = auth()->user())
-                <x-mary-list-item :item="$user" sub-value="username" no-separator no-hover class="!-mx-2 mt-2 mb-5 border-y border-y-sky-900">
-                    <x-slot:actions>
-                        <livewire:logout-btn />
-                    </x-slot:actions>
-                </x-mary-list-item>
+                @if ($user = auth()->user())
+                    <x-mary-list-item :item="$user" sub-value="username" no-separator no-hover
+                        class="!-mx-2 mt-2 mb-5 border-y border-y-sky-900">
+                        <x-slot:actions>
+                            <livewire:logout-btn />
+                        </x-slot:actions>
+                    </x-mary-list-item>
                 @endif
 
-                <x-mary-menu-item title="Hello" icon="o-sparkles" link="/" />
-                <x-mary-menu-sub title="Settings" icon="o-cog-6-tooth">
-                    <x-mary-menu-item title="Wifi" icon="o-wifi" link="####" />
-                    <x-mary-menu-item title="Archives" icon="o-archive-box" link="####" />
-                </x-mary-menu-sub>
+                <x-mary-menu-item title="Dashboard" icon="o-computer-desktop" link="{{ route('dashboard') }}" />
+                <x-mary-menu-item title="Tenants" icon="o-users" link="{{ route('tenants.index') }}" />
+                <!-- <x-mary-menu-sub title="Settings" icon="o-cog-6-tooth"> -->
+                <!--     <x-mary-menu-item title="Wifi" icon="o-wifi" link="####" /> -->
+                <!--     <x-mary-menu-item title="Archives" icon="o-archive-box" link="####" /> -->
+                <!-- </x-mary-menu-sub> -->
             </x-mary-menu>
         </x-slot:sidebar>
 

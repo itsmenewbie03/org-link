@@ -23,4 +23,6 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
+Route::resource('/tenants', \App\Http\Controllers\TenantController::class)->middleware(['auth']);
+
 require __DIR__.'/auth.php';
