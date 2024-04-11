@@ -30,7 +30,7 @@ class TenantController extends Controller
      */
     public function store(Request $request): void
     {
-        //
+        dd("fuck");
     }
 
     /**
