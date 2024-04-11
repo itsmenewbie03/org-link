@@ -53,10 +53,6 @@
 
                 <x-mary-menu-item title="Dashboard" icon="o-computer-desktop" link="{{ route('dashboard') }}" />
                 <x-mary-menu-item title="Tenants" icon="o-users" link="{{ route('tenants.index') }}" />
-                <!-- <x-mary-menu-sub title="Settings" icon="o-cog-6-tooth"> -->
-                <!--     <x-mary-menu-item title="Wifi" icon="o-wifi" link="####" /> -->
-                <!--     <x-mary-menu-item title="Archives" icon="o-archive-box" link="####" /> -->
-                <!-- </x-mary-menu-sub> -->
             </x-mary-menu>
         </x-slot:sidebar>
 
