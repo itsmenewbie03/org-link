@@ -7,12 +7,27 @@ new class extends Component {
     use Toast;
     public $tenants;
 
-    // NOTE: tenant informations
+    public function mount()
+    {
+        // NOTE: I am stupid for storing the plan in lowercase
+        // so we transform it to uppercase here coz I have OCD xD
+        // and this worked xD
+        foreach ($this->tenants as $tenant) {
+            $tenant->plan = ucfirst($tenant->plan);
+        }
+    }
 
+    // INFO: maryui opts
     public bool $myModal2 = false;
+    public array $sortBy = ['column' => 'id', 'direction' => 'asc'];
+
+    // NOTE: tenant informations
     public string $tenant_email;
     public string $tenant_id;
     public string $tenant_name;
+    public string $tenant_org_name;
+    // NOTE: nano would be the default plan
+    public string $plan = 'nano';
 
     public function rules()
     {
@@ -20,19 +35,22 @@ new class extends Component {
             'tenant_id' => 'required|min:3|alpha_dash',
             'tenant_email' => 'required|email',
             'tenant_name' => 'required|min:5',
+            'tenant_org_name' => 'required|min:5',
+            'plan' => 'required',
         ];
     }
 
     public function create_tenant()
     {
-        sleep(1);
         $this->validate();
         // NOTE: i find this weird but we're doing db call here
         // I'm having trouble passing the tenant information to the controller
         $tenant = App\Models\Tenant::create([
             'id' => $this->tenant_id,
+            'organization_name' => $this->tenant_org_name,
             'name' => $this->tenant_name,
             'email' => $this->tenant_email,
+            'plan' => $this->plan,
         ]);
         $tenant->domains()->create(['domain' => $this->tenant_id . '.localhost']);
         return $this->redirectRoute('tenants.index');
@@ -40,13 +58,31 @@ new class extends Component {
 }; ?>
 
 <div>
+    {{-- INFO: create tenant modal --}}
+    @php
+        $plans = [
+            [
+                'id' => 'nano',
+                'name' => 'Nano',
+            ],
+            [
+                'id' => 'mega',
+                'name' => 'Mega',
+            ],
+            [
+                'id' => 'giga',
+                'name' => 'Giga',
+            ],
+        ];
+    @endphp
     <x-mary-modal wire:model="myModal2" title="New Tenant" subtitle="Let's start something new...">
         <x-mary-form>
 
-            <x-mary-input label="ID" wire:model="tenant_id" />
-            <x-mary-input label="Name" wire:model="tenant_name" />
-            <x-mary-input label="E-mail" wire:model="tenant_email" />
-
+            <x-mary-input label="Domain" wire:model="tenant_id" icon="o-globe-alt" inline />
+            <x-mary-input label="Organization Name" wire:model="tenant_org_name" icon="o-user-group" inline />
+            <x-mary-input label="Name" wire:model="tenant_name" icon="o-user" inline />
+            <x-mary-input label="E-mail" wire:model="tenant_email" icon="o-at-symbol" inline />
+            <x-mary-select label="Plan" icon="o-credit-card" :options="$plans" wire:model="plan" inline />
         </x-mary-form>
 
         <x-slot:actions>
@@ -56,13 +92,14 @@ new class extends Component {
     </x-mary-modal>
     @php
         $headers = [
-            ['key' => 'id', 'label' => 'Tenant ID'],
-            ['key' => 'tenancy_db_name', 'label' => 'Tenant Database Name'],
+            ['key' => 'id', 'label' => 'Tenant Domain'],
+            ['key' => 'organization_name', 'label' => 'Tenant Organization Name'],
             ['key' => 'name', 'label' => 'Tenant Name'],
             ['key' => 'email', 'label' => 'Tenant Email'],
+            ['key' => 'plan', 'label' => 'Plan'],
         ];
     @endphp
     {{-- You can use any `$wire.METHOD` on `@row-click` --}}
     <x-mary-button icon="o-plus" class="btn-primary" label="Add Tenant" @click="$wire.myModal2 = true" spinner />
-    <x-mary-table :headers="$headers" :rows="$tenants" striped />
+    <x-mary-table :headers="$headers" :rows="$tenants" :sort-by="$sortBy" striped />
 </div>
