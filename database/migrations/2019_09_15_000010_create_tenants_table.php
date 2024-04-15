@@ -18,8 +18,10 @@ class CreateTenantsTable extends Migration
         Schema::create('tenants', function (Blueprint $table) {
             $table->string('id')->primary();
 
+            $table->string('organization_name')->unique();
             $table->string('name')->unique();
             $table->string('email')->unique();
+            $table->string('plan');
 
             $table->timestamps();
             $table->json('data')->nullable();
