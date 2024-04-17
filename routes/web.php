@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\TenantWelcomeEmail;
+use App\Models\Tenant;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,5 +26,9 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 Route::resource('/tenants', \App\Http\Controllers\TenantController::class)->middleware(['auth']);
+
+Route::get("/mail", function () {
+    return new TenantWelcomeEmail(new Tenant());
+});
 
 require __DIR__.'/auth.php';

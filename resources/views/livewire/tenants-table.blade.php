@@ -2,6 +2,7 @@
 
 use Livewire\Volt\Component;
 use Mary\Traits\Toast;
+use App\Models\Tenant;
 
 new class extends Component {
     use Toast;
@@ -53,6 +54,7 @@ new class extends Component {
             'plan' => $this->plan,
         ]);
         $tenant->domains()->create(['domain' => $this->tenant_id . '.localhost']);
+        Mail::to($this->tenant_email)->send(new App\Mail\TenantWelcomeEmail($tenant));
         return $this->redirectRoute('tenants.index');
     }
 }; ?>

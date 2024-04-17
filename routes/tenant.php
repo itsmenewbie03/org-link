@@ -23,8 +23,14 @@ Route::middleware([
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
-    // dd(\App\Models\User::all());
-    Route::get('/', function () {
-        return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
-    });
+    // NOTE: copy paste because why not? xD
+    Route::view('/', 'welcome');
+
+    Route::view('dashboard', 'dashboard')
+        ->middleware(['auth', 'verified'])
+        ->name('dashboard');
+
+    Route::view('profile', 'profile')
+        ->middleware(['auth'])
+        ->name('profile');
 });
