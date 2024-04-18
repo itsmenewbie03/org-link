@@ -3,6 +3,8 @@
 use Livewire\Volt\Component;
 use Mary\Traits\Toast;
 use App\Models\Tenant;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 new class extends Component {
     use Toast;
@@ -54,6 +56,22 @@ new class extends Component {
             'plan' => $this->plan,
         ]);
         $tenant->domains()->create(['domain' => $this->tenant_id . '.localhost']);
+
+        // TODO: create a new user in the tenant db
+        // NOTE: we'll use the tenant db connection
+
+        // INFO: this a shameless copy from dormy implementation xD
+        $connection = 'tenant' . $this->tenant_id;
+        $password = 'password';
+        config(['database.connections.new.database' => $connection]);
+        DB::connection('new');
+        User::on('new')->insert([
+            'name' => $this->tenant_name,
+            'email' => $this->tenant_email,
+            'password' => Hash::make($password),
+        ]);
+        // NOTE: we need to switch back to the default connection
+        DB::setDefaultConnection('mysql');
         Mail::to($this->tenant_email)->send(new App\Mail\TenantWelcomeEmail($tenant));
         return $this->redirectRoute('tenants.index');
     }

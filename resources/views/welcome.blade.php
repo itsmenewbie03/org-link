@@ -15,12 +15,29 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="antialiased">
-    <div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
-        @if (Route::has('login'))
-        <livewire:welcome.navigation />
-        @endif
-    </div>
+<body class="min-h-screen font-sans antialiased bg-base-200/50 dark:bg-base-200">
+    {{-- You could elaborate the layout here --}}
+    {{-- The important part is to have a different layout from the main app layout --}}
+    <x-mary-main full-width>
+        <x-slot:content>
+            @if (Route::has('login'))
+                <livewire:welcome.navigation />
+            @endif
+            <div class="flex gap-2 mt-14">
+                <x-mary-stat title="Messages" value="44" icon="o-envelope" tooltip="Hello" />
+
+                <x-mary-stat title="Sales" description="This month" value="22.124" icon="o-arrow-trending-up"
+                    tooltip-bottom="There" />
+
+                <x-mary-stat title="Lost" description="This month" value="34" icon="o-arrow-trending-down"
+                    tooltip-left="Ops!" />
+
+                <x-mary-stat title="Sales" description="This month" value="22.124" icon="o-arrow-trending-down"
+                    class="text-orange-500" color="text-pink-500" tooltip-right="Gosh!" />
+            </div>
+
+        </x-slot:content>
+    </x-mary-main>
 </body>
 
 </html>

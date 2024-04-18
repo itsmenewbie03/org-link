@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\TenantLoginController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
@@ -23,8 +24,10 @@ Route::middleware([
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
-    // NOTE: copy paste because why not? xD
-    Route::view('/', 'welcome');
+
+    Route::view('/', function () {
+        return redirect(route('tenant.login'));
+    });
 
     Route::view('dashboard', 'dashboard')
         ->middleware(['auth', 'verified'])
@@ -34,8 +37,5 @@ Route::middleware([
         ->middleware(['auth'])
             ->name('profile');
 
-    // NOTE: weird but why not? xD
-    // Fuck This Works xD
-    // The Codes Expands Here?
-    require __DIR__.'/auth.php';
+    Route::get("/login", [TenantLoginController::class,'login'])->middleware("guest")->name("tenant.login");
 });
