@@ -46,7 +46,7 @@
                     <x-mary-list-item :item="$user" sub-value="username" no-separator no-hover
                         class="!-mx-2 mt-2 mb-5 border-y border-y-sky-900">
                         <x-slot:actions>
-                            <livewire:logout-btn />
+                            <livewire:username-quick-actions />
                         </x-slot:actions>
                     </x-mary-list-item>
                 @endif

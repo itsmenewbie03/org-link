@@ -32,5 +32,10 @@ Route::middleware([
 
     Route::view('profile', 'profile')
         ->middleware(['auth'])
-        ->name('profile');
+            ->name('profile');
+
+    // NOTE: weird but why not? xD
+    // Fuck This Works xD
+    // The Codes Expands Here?
+    require __DIR__.'/auth.php';
 });

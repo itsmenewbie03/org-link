@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use App\Mail\TenantWelcomeEmail;
 use App\Models\Tenant;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::view('profile', 'profile')
 
 Route::resource('/tenants', \App\Http\Controllers\TenantController::class)->middleware(['auth']);
 
+// TEST: mail preview
 Route::get("/mail", function () {
     return new TenantWelcomeEmail(new Tenant());
 });
