@@ -5,6 +5,7 @@ use Mary\Traits\Toast;
 use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 new class extends Component {
     use Toast;
@@ -62,17 +63,17 @@ new class extends Component {
 
         // INFO: this a shameless copy from dormy implementation xD
         $connection = 'tenant' . $this->tenant_id;
-        $password = 'password';
+        $password = Str::random(12);
         config(['database.connections.new.database' => $connection]);
-        DB::connection('new');
-        User::on('new')->insert([
+        DB::setDefaultConnection('new');
+        User::insert([
             'name' => $this->tenant_name,
             'email' => $this->tenant_email,
             'password' => Hash::make($password),
         ]);
         // NOTE: we need to switch back to the default connection
         DB::setDefaultConnection('mysql');
-        Mail::to($this->tenant_email)->send(new App\Mail\TenantWelcomeEmail($tenant));
+        Mail::to($this->tenant_email)->send(new App\Mail\TenantWelcomeEmail($tenant, $password));
         return $this->redirectRoute('tenants.index');
     }
 }; ?>

@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\TenantLoginController;
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
@@ -25,8 +25,8 @@ Route::middleware([
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
 
-    Route::view('/', function () {
-        return redirect(route('tenant.login'));
+    Route::get('/', function () {
+        return redirect(route('tenant.login'))->with('tenant_id', tenant('id'));
     });
 
     Route::view('dashboard', 'dashboard')
@@ -37,5 +37,5 @@ Route::middleware([
         ->middleware(['auth'])
             ->name('profile');
 
-    Route::get("/login", [TenantLoginController::class,'login'])->middleware("guest")->name("tenant.login");
+    Volt::route('/login', 'login')->name('tenant.login');
 });

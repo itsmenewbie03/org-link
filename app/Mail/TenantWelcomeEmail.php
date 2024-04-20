@@ -18,11 +18,9 @@ class TenantWelcomeEmail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(protected Tenant $tenant)
+    public function __construct(protected Tenant $tenant, protected String $password)
     {
-        //
     }
-
 
     /**
      * Get the message envelope.
@@ -41,7 +39,7 @@ class TenantWelcomeEmail extends Mailable
     {
         return new Content(
             markdown: 'emails.tenant.welcome',
-            with: ['tenant' => $this->tenant],
+            with: ['tenant' => $this->tenant, 'password' => $this->password]
         );
     }
 
