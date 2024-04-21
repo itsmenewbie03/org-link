@@ -30,7 +30,7 @@ Route::resource('/tenants', \App\Http\Controllers\TenantController::class)->midd
 
 // TEST: mail preview
 Route::get("/mail", function () {
-    return new TenantWelcomeEmail(new Tenant());
+    return new TenantWelcomeEmail(new Tenant(), "deeznuts");
 });
 
 require __DIR__.'/auth.php';

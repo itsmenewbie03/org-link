@@ -4,7 +4,6 @@ namespace App\Mail;
 
 use App\Models\Tenant;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -20,6 +19,9 @@ class TenantWelcomeEmail extends Mailable
      */
     public function __construct(protected Tenant $tenant, protected String $password)
     {
+        // HACK: bind a domain to the tenant
+        $id = $this->tenant->id;
+        $this->tenant->domain = "http://$id.localhost:8000";
     }
 
     /**

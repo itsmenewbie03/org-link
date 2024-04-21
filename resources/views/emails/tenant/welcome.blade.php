@@ -14,7 +14,7 @@ Thanks for your subscription. We're excited to have you on board!
 - **Email:** {{ $tenant->email ?? 'Deez Nuts' }}
 - **Password:** {{ $password ?? 'Deez Nuts' }}
 - **Plan:** {{ $tenant->plan ? ucfirst($tenant->plan) : 'Deez Nuts' }}
-<x-mail::button :url="'http://itsmenewbie03.is-a.dev'">
+<x-mail::button :url="@($tenant->domain)">
 Get Started
 </x-mail::button>
 Thanks,<br>
