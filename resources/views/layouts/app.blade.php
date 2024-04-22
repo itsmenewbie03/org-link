@@ -52,7 +52,11 @@
                 @endif
 
                 <x-mary-menu-item title="Dashboard" icon="o-computer-desktop" link="{{ route('dashboard') }}" />
-                <x-mary-menu-item title="Tenants" icon="o-users" link="{{ route('tenants.index') }}" />
+                {{-- INFO: this will be available only to central apps --}}
+                {{-- INFO: this done through checking if tenant is null --}}
+                @if (is_null(tenant('id')))
+                    <x-mary-menu-item title="Tenants" icon="o-users" link="{{ route('tenants.index') }}" />
+                @endif
             </x-mary-menu>
         </x-slot:sidebar>
 
