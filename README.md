@@ -38,7 +38,7 @@ To run this project open two terminals and run
 
 As usual we will fail if we don't make this xD
 
-## Contributors ✨
+## ✨ Contributors 
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
