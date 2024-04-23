@@ -36,6 +36,13 @@ new #[Layout('components.layouts.empty')] #[Title('Login')] class
         }
     }
 
+
+    public function rendering($view, $data)
+    {
+        $this->tenant = Tenant::find($this->tenant_id);
+    }
+
+
     public function login()
     {
         $credentials = $this->validate();
@@ -63,9 +70,10 @@ new #[Layout('components.layouts.empty')] #[Title('Login')] class
 }; ?>
 
 <div class="md:w-96 mx-auto mt-40">
-    <x-mary-header title="{{ $this->tenant->organization_name }}" subtitle="Please login to get started!" separator />
+
     <!-- <div class="mb-10">Cool image here</div> -->
     <x-mary-form wire:submit="login">
+        <x-mary-header title="{{ $this->tenant->organization_name }}" subtitle="Please login to get started!" separator />
         <x-mary-input label="E-mail" wire:model="email" icon="o-envelope" inline />
         <x-mary-input label="Password" wire:model="password" type="password" icon="o-key" inline />
 
