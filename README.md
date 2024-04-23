@@ -1,6 +1,6 @@
 # OrgLink 🤝 [![author/maintainer](https://img.shields.io/badge/by-itsmenewbie03-016eea.svg?logo=github&labelColor=181717&longCache=true&style=flat-square)](https://itsmenewbie03.is-a.dev)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 **OrgLink** is a feature-rich Multi-tenant Attendance System for Student Organizations in universities.
@@ -49,6 +49,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://jersoncarin.me"><img src="https://avatars.githubusercontent.com/u/63774442?v=4?s=100" width="100px;" alt="Jerson Carin"/><br /><sub><b>Jerson Carin</b></sub></a><br /><a href="https://github.com/itsmenewbie03/org-link/issues?q=author%3Ajersoncarin" title="Bug reports">🐛</a> <a href="https://github.com/itsmenewbie03/org-link/commits?author=jersoncarin" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Toshiven"><img src="https://avatars.githubusercontent.com/u/89244934?v=4?s=100" width="100px;" alt="Andrew Kevin M. Abler"/><br /><sub><b>Andrew Kevin M. Abler</b></sub></a><br /><a href="https://github.com/itsmenewbie03/org-link/commits?author=Toshiven" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
