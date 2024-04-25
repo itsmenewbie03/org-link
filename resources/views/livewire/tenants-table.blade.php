@@ -110,7 +110,7 @@ new class extends Component {
 
         <x-slot:actions>
             <x-mary-button label="Cancel" @click="$wire.myModal2 = false" />
-            <x-mary-button label="Create" class="btn-primary" wire:click="create_tenant" spinner />
+            <x-mary-button label="Create" icon="o-plus" class="btn-primary" wire:click="create_tenant" spinner />
         </x-slot:actions>
     </x-mary-modal>
     @php
@@ -123,6 +123,6 @@ new class extends Component {
         ];
     @endphp
     {{-- You can use any `$wire.METHOD` on `@row-click` --}}
-    <x-mary-button icon="o-plus" class="btn-primary" label="Add Tenant" @click="$wire.myModal2 = true" spinner />
+    <x-mary-button icon="o-user-plus" class="btn-primary" label="Add Tenant" @click="$wire.myModal2 = true" spinner />
     <x-mary-table :headers="$headers" :rows="$tenants" :sort-by="$sortBy" striped />
 </div>
