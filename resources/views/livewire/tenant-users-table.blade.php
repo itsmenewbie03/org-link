@@ -4,7 +4,6 @@ use Livewire\Volt\Component;
 
 new class extends Component {
     public $users;
-    public array $sortBy = ['column' => 'id', 'direction' => 'asc'];
 
     public function mount()
     {
@@ -25,5 +24,5 @@ new class extends Component {
             ['key' => 'role', 'label' => 'Role'],
         ];
     @endphp
-    <x-mary-table :headers="$headers" :rows="$users" :sort-by="$sortBy" striped />
+    <x-mary-table :headers="$headers" :rows="$users" striped />
 </div>
