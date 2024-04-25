@@ -4,6 +4,7 @@ use Livewire\Attributes\Rule;
 use Livewire\Attributes\Title;
 use Livewire\Volt\Component;
 use Illuminate\Support\Facades\DB;
+use Mary\Traits\Toast;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Tenant;
@@ -11,6 +12,8 @@ use App\Models\Tenant;
 new #[Layout('components.layouts.empty')] #[Title('Login')] class
     // <-- Here is the `empty` layout
     extends Component {
+    use Toast;
+
     #[Rule('required|email')]
     public string $email = '';
 
@@ -19,6 +22,8 @@ new #[Layout('components.layouts.empty')] #[Title('Login')] class
 
     // NOTE: this is for changing the db connection
     public string $tenant_id;
+
+    public $tenant;
 
     public function mount()
     {
@@ -36,12 +41,10 @@ new #[Layout('components.layouts.empty')] #[Title('Login')] class
         }
     }
 
-
     public function rendering($view, $data)
     {
         $this->tenant = Tenant::find($this->tenant_id);
     }
-
 
     public function login()
     {
@@ -67,6 +70,10 @@ new #[Layout('components.layouts.empty')] #[Title('Login')] class
     {
         DB::setDefaultConnection('mysql');
     }
+    public function request_account()
+    {
+        $this->error('This feature is disabled for security reasons. Please contact  ' . $this->tenant->name . ', your administrator.', timeout: 3000);
+    }
 }; ?>
 
 <div class="md:w-96 mx-auto mt-40">
@@ -78,7 +85,7 @@ new #[Layout('components.layouts.empty')] #[Title('Login')] class
         <x-mary-input label="Password" wire:model="password" type="password" icon="o-key" inline />
 
         <x-slot:actions>
-            <x-mary-button label="Request for an account" class="btn-ghost" link="/register" />
+            <x-mary-button label="Request for an account" class="btn-ghost" wire:click="request_account" />
             <x-mary-button label="Login" type="submit" icon="o-paper-airplane" class="btn-primary" spinner="login" />
         </x-slot:actions>
     </x-mary-form>
