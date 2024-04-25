@@ -12,8 +12,14 @@ if (! function_exists('stupid_db_hack')) {
     }
 }
 
-// TODO: migrate all stupid hacks to the smarter one
 if (! function_exists('smart_db_hack')) {
+
+    /**
+     * This is a `smart` trick to switch the db based on the current domain.
+     * This should not be an issue until the subdomain will be accessed
+     * Through a CNAME. This should work for now xD.
+    */
+
     function smart_db_hack()
     {
         $domain = Request::getHost();
