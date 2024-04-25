@@ -70,6 +70,8 @@ new class extends Component {
             'name' => $this->tenant_name,
             'email' => $this->tenant_email,
             'password' => Hash::make($password),
+            // NOTE: the generated account is automatically the admin of the tenant
+            'role' => 'admin',
         ]);
         // NOTE: we need to switch back to the default connection
         DB::setDefaultConnection('mysql');
