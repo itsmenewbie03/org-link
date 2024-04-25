@@ -52,6 +52,13 @@
                 @endif
 
                 <x-mary-menu-item title="Dashboard" icon="o-computer-desktop" link="{{ route('dashboard') }}" />
+                {{-- NOTE: this will be the navigation items for the tenant app --}}
+                @if (!is_null(tenant('id')))
+                    {{-- NOTE: this will only be available if role == admin --}}
+                    @if (auth()->user()->role == 'admin')
+                        <x-mary-menu-item title="Users" icon="o-users" link="{{ route('users.index') }}" />
+                    @endif
+                @endif
                 {{-- INFO: this will be available only to central apps --}}
                 {{-- INFO: this done through checking if tenant is null --}}
                 @if (is_null(tenant('id')))
