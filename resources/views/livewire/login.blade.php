@@ -34,9 +34,9 @@ new #[Layout('components.layouts.empty')] #[Title('Login')] class
         }
         $this->tenant_id = session('tenant_id');
         $this->tenant = Tenant::find($this->tenant_id);
-        $this->stupid_db_hack();
+        stupid_db_hack($this->tenant->tenancy_db_name);
         if (auth()->user()) {
-            $this->end_stupid_db_hack();
+            end_stupid_db_hack();
             return redirect(route('dashboard'));
         }
     }
@@ -50,26 +50,15 @@ new #[Layout('components.layouts.empty')] #[Title('Login')] class
     {
         $credentials = $this->validate();
         // HACK: we gonna do something stupid (I think it is xD)
-        $this->stupid_db_hack();
+        stupid_db_hack($this->tenant->tenancy_db_name);
         if (auth()->attempt($credentials)) {
             request()->session()->regenerate();
-            $this->end_stupid_db_hack();
+            end_stupid_db_hack();
             return redirect()->intended('/');
         }
         $this->addError('email', 'The provided credentials do not match our records.');
     }
 
-    public function stupid_db_hack()
-    {
-        $connection = 'tenant' . $this->tenant_id;
-        config(['database.connections.new.database' => $connection]);
-        DB::setDefaultConnection('new');
-    }
-
-    public function end_stupid_db_hack()
-    {
-        DB::setDefaultConnection('mysql');
-    }
     public function request_account()
     {
         $this->error('This feature is disabled for security reasons. Please contact  ' . $this->tenant->name . ', your administrator.', timeout: 3000);
