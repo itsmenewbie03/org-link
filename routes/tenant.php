@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
+use App\Http\Controllers\TenantUsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,6 @@ Route::middleware([
     Route::view('profile', 'profile')
         ->middleware(['auth'])
             ->name('profile');
-
+    Route::resource("/users", TenantUsersController::class);
     Volt::route('/login', 'login')->name('tenant.login');
 });
