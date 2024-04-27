@@ -19,15 +19,6 @@ new class extends Component {
         $this->boot();
     }
 
-    public function mount()
-    {
-        // NOTE: role is on all lowercase
-        // so we transform it to uppercase here coz I have OCD xD
-        foreach ($this->users as $user) {
-            $user->role = ucfirst($user->role);
-        }
-    }
-
     public function boot()
     {
         // NOTE: `boot` gets called when the delete button is clicked
@@ -35,6 +26,10 @@ new class extends Component {
         // again.
         smart_db_hack();
         $this->users = DB::table('users')->get();
+
+        foreach ($this->users as $user) {
+            $user->role = ucfirst($user->role);
+        }
     }
 
     public function confirm_delete($id)
@@ -75,6 +70,9 @@ new class extends Component {
         </x-slot:actions>
     </x-mary-modal>
     <x-mary-table :headers="$headers" :rows="$users">
+        @scope('cell_role', $user)
+            <x-mary-badge :value="$user->role" class="{{ $user->role === 'Admin' ? 'badge-primary' : '' }}" />
+        @endscope
         @scope('actions', $user)
             <x-mary-button icon="o-trash" wire:click="confirm_delete({{ $user->id }})" spinner class="btn-sm" />
         @endscope
