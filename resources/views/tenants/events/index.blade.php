@@ -32,8 +32,27 @@
             ],
         ];
     @endphp
-    <x-mary-card title="Monthly Events Calendar" subtitle="Stay on Top of What's Happening" class="w-fit" shadow separator>
-        {{-- TODO: get rid of this ugly config call --}}
-        <x-mary-calendar locale="en-PH" :events="$events" weekend-highlight :config="['settings' => ['iso8601' => false]]" />
-    </x-mary-card>
+
+    @php
+        $users = App\Models\User::take(3)->get();
+    @endphp
+    <div class="w-full flex">
+        <x-mary-card title="Quick Actions" class="w-1/3 mr-6" shadow separator>
+            <x-mary-menu>
+                <x-mary-menu-item title="New Event" icon="o-plus" />
+                <x-mary-menu-item title="Start Attendance" icon="o-list-bullet" />
+            </x-mary-menu>
+        </x-mary-card>
+
+        <x-mary-card title="Upcoming Events" class="w-1/3 mr-6" shadow separator>
+            @foreach ($users as $user)
+                <x-mary-list-item :item="$user" />
+            @endforeach
+        </x-mary-card>
+
+        <x-mary-card title="Monthly Events Calendar" class="w-fit" shadow separator>
+            {{-- TODO: get rid of this ugly config call --}}
+            <x-mary-calendar locale="en-PH" :events="$events" weekend-highlight :config="['settings' => ['iso8601' => false]]" />
+        </x-mary-card>
+    </div>
 @endsection
