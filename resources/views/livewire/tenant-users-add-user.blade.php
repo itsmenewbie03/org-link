@@ -39,8 +39,7 @@ new class extends Component {
         ]);
         $this->reset();
         $this->myModal2 = false;
-        session()->flash('message', 'User created successfully!');
-        $this->redirectRoute('users.index');
+        $this->dispatch('refresh_users');
     }
 
     public function toggle_password()
@@ -50,7 +49,7 @@ new class extends Component {
 }; ?>
 
 <div>
-    <x-mary-modal wire:model="myModal2" title="New User" subtitle="Let's get started...">
+    <x-mary-modal wire:model="myModal2" persistent title="New User" subtitle="Let's get started...">
         <x-mary-form>
             <x-mary-input label="Name" wire:model="name" icon="o-user" inline />
             {{-- HACK: we add hidden to that the autofill will be redirected here --}}
