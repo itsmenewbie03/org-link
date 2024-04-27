@@ -32,7 +32,8 @@
             ],
         ];
     @endphp
-    {{-- TODO: get rid of this ugly config call --}}
-    <h1 class="text-2xl font-bold mb-6">Events</h1>
-    <x-mary-calendar locale="en-PH" :events="$events" weekend-highlight :config="['settings' => ['iso8601' => false]]" />
+    <x-mary-card title="Monthly Events Calendar" subtitle="Stay on Top of What's Happening" class="w-fit" shadow separator>
+        {{-- TODO: get rid of this ugly config call --}}
+        <x-mary-calendar locale="en-PH" :events="$events" weekend-highlight :config="['settings' => ['iso8601' => false]]" />
+    </x-mary-card>
 @endsection
