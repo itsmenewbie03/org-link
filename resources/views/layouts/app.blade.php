@@ -58,6 +58,7 @@
                     @if (auth()->user()->role == 'admin')
                         <x-mary-menu-item title="Users" icon="o-users" link="{{ route('users.index') }}" />
                     @endif
+                    <x-mary-menu-item title="Events" icon="o-calendar-days" link="{{ route('events.index') }}" />
                 @endif
                 {{-- INFO: this will be available only to central apps --}}
                 {{-- INFO: this done through checking if tenant is null --}}
