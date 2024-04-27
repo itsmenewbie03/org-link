@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\TenantEventsController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
@@ -37,6 +38,9 @@ Route::middleware([
     Route::view('profile', 'profile')
         ->middleware(['auth'])
             ->name('profile');
+
     Route::resource("/users", TenantUsersController::class);
+    Route::resource("/events", TenantEventsController::class);
+
     Volt::route('/login', 'login')->name('tenant.login');
 });
