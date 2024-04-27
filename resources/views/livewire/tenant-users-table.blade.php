@@ -62,11 +62,17 @@ new class extends Component {
             ['key' => 'role', 'label' => 'Role'],
         ];
     @endphp
-    <x-mary-modal wire:model="myModal3" title="Confirm" persistent class="backdrop-blur">
-        <div>Are you sure you want to delete {{ $target_user }}?</div>
+    <x-mary-modal wire:model="myModal3" title="Delete User?" persistent class="backdrop-blur">
+        <div class="text-justify">
+            Deleting this user will <b>PERMANENTLY</b> remove it from the database.
+            After deletion, <b> {{ $target_user }} </b> will no longer have access to the system.
+            <br>
+            <br>
+            <b>Warning: This cannot be undone.</b>
+        </div>
         <x-slot:actions>
-            <x-mary-button label="Yes" icon="o-check" wire:click="delete_user" />
-            <x-mary-button label="No" icon="o-x-mark" class="btn-primary" @click="$wire.myModal3 = false" />
+            <x-mary-button label="No, Keep this User" icon="o-x-mark" @click="$wire.myModal3 = false" />
+            <x-mary-button label="Yes, Delete this User" icon="o-check" class="btn-primary" wire:click="delete_user" />
         </x-slot:actions>
     </x-mary-modal>
     <x-mary-table :headers="$headers" :rows="$users">
