@@ -23,7 +23,6 @@ new class extends Component {
 
     // INFO: maryui opts
     public bool $myModal2 = false;
-    public array $sortBy = ['column' => 'id', 'direction' => 'asc'];
 
     // NOTE: tenant informations
     public string $tenant_email;
@@ -123,6 +122,23 @@ new class extends Component {
         ];
     @endphp
     {{-- You can use any `$wire.METHOD` on `@row-click` --}}
-    <x-mary-button icon="o-user-plus" class="btn-primary" label="Add Tenant" @click="$wire.myModal2 = true" spinner />
-    <x-mary-table :headers="$headers" :rows="$tenants" :sort-by="$sortBy" striped />
+
+    <x-mary-card title="Tenants">
+        <x-slot:menu>
+            <x-mary-button icon="o-user-plus" class="btn-ghost" label="Add Tenant" @click="$wire.myModal2 = true"
+                spinner />
+        </x-slot:menu>
+        <x-mary-table :headers="$headers" :rows="$tenants">
+            @scope('cell_plan', $tenant)
+                @php
+                    $badge = match ($tenant->plan) {
+                        'Nano' => 'badge-success',
+                        'Mega' => 'badge-warning',
+                        'Giga' => 'badge-error',
+                    };
+                @endphp
+                <x-mary-badge :value="$tenant->plan" class="{{ $badge }}" />
+            @endscope
+        </x-mary-table>
+    </x-mary-card>
 </div>
