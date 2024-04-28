@@ -15,7 +15,7 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.6",
-        "robsontenorio/mary": "^1.25",
+        "robsontenorio/mary": "^1.30",
         "stancl/tenancy": "^3.8"
     },
     "require-dev": {
