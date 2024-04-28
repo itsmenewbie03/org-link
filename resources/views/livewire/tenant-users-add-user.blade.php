@@ -72,5 +72,5 @@ new class extends Component {
             <x-mary-button label="Create" icon="o-plus" class="btn-primary" wire:click="create_user" spinner />
         </x-slot:actions>
     </x-mary-modal>
-    <x-mary-button icon="o-user-plus" class="btn-primary" label="Add User" @click="$wire.myModal2 = true" spinner />
+    <x-mary-button icon="o-user-plus" label="Add User" @click="$wire.myModal2 = true" class="btn-ghost" spinner />
 </div>

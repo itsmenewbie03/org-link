@@ -75,12 +75,18 @@ new class extends Component {
             <x-mary-button label="Yes, Delete this User" icon="o-check" class="btn-primary" wire:click="delete_user" />
         </x-slot:actions>
     </x-mary-modal>
-    <x-mary-table :headers="$headers" :rows="$users">
-        @scope('cell_role', $user)
-            <x-mary-badge :value="$user->role" class="{{ $user->role === 'Admin' ? 'badge-primary' : '' }}" />
-        @endscope
-        @scope('actions', $user)
-            <x-mary-button icon="o-trash" wire:click="confirm_delete({{ $user->id }})" spinner class="btn-sm" />
-        @endscope
-    </x-mary-table>
+    <x-mary-card title="Users">
+        <x-slot:menu>
+            <livewire:tenant-users-add-user />
+        </x-slot:menu>
+        <x-mary-table :headers="$headers" :rows="$users">
+            @scope('cell_role', $user)
+                <x-mary-badge :value="$user->role" class="{{ $user->role === 'Admin' ? 'badge-primary' : '' }}" />
+            @endscope
+            @scope('actions', $user)
+                <x-mary-button icon="o-trash" wire:click="confirm_delete({{ $user->id }})" spinner
+                    class="btn-ghost btn-sm text-red-500" />
+            @endscope
+        </x-mary-table>
+    </x-mary-card>
 </div>
