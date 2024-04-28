@@ -16,9 +16,8 @@
 
     {{-- NAVBAR mobile only --}}
     <x-mary-nav sticky class="lg:hidden">
-        <x-slot:brand class="flex gap-2 items-center">
-            <x-mary-icon name="o-square-3-stack-3d" class="text-primary" />
-            <div>{{ config('app.name', 'Laravel') }}</div>
+        <x-slot:brand>
+            <x-app-brand />
         </x-slot:brand>
         <x-slot:actions>
             <label for="main-drawer" class="lg:hidden mr-3">
@@ -33,10 +32,12 @@
         <x-slot:sidebar drawer="main-drawer" collapsible class="bg-base-100 lg:bg-inherit">
 
             {{-- BRAND --}}
-            <div class="p-6 pt-3 flex gap-3 items-center h-20">
-                <x-mary-icon name="o-academic-cap" class="text-primary" />
-                <div class="hidden-when-collapsed">{{ config('app.name', 'Laravel') }}</div>
-            </div>
+
+            @if (!is_null(tenant('id')))
+                <x-app-brand name="{{ tenant('organization_name') }}" icon="o-academic-cap" class="p-5 pt-3" />
+            @else
+                <x-app-brand icon="o-academic-cap" class="p-5 pt-3" />
+            @endif
 
             {{-- MENU --}}
             <x-mary-menu activate-by-route>
