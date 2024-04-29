@@ -19,9 +19,9 @@ class TenantEventsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): void
+    public function create(): View|Factory
     {
-        //
+        return view('tenants.events.create');
     }
 
     /**
@@ -29,7 +29,6 @@ class TenantEventsController extends Controller
      */
     public function store(Request $request): void
     {
-        //
     }
 
     /**
