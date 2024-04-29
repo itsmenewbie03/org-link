@@ -39,8 +39,10 @@ Route::middleware([
         ->middleware(['auth'])
             ->name('profile');
 
-    Route::resource("/users", TenantUsersController::class);
-    Route::resource("/events", TenantEventsController::class);
+    Route::middleware(['auth'])->group(function () {
+        Route::resource("/users", TenantUsersController::class);
+        Route::resource("/events", TenantEventsController::class);
+    });
 
     Volt::route('/login', 'login')->name('tenant.login');
 });
