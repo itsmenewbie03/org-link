@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\TenantEventsController;
+use App\Http\Middleware\TenantAdmin;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Livewire\Volt\Volt;
@@ -41,7 +42,7 @@ Route::middleware([
             ->name('profile');
 
     Route::middleware(['auth'])->group(function () {
-        Route::resource("/users", TenantUsersController::class);
+        Route::resource("/users", TenantUsersController::class)->middleware(TenantAdmin::class);
         Route::resource("/events", TenantEventsController::class);
     });
 
