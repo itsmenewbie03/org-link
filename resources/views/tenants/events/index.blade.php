@@ -37,13 +37,7 @@
         $users = App\Models\User::take(3)->get();
     @endphp
     <div class="w-full flex">
-        <x-mary-card title="Quick Actions" class="w-1/3 mr-6" shadow separator>
-            <x-mary-menu>
-                <x-mary-menu-item title="New Event" icon="o-plus" />
-                <x-mary-menu-item title="Start Attendance" icon="o-list-bullet" />
-            </x-mary-menu>
-        </x-mary-card>
-
+        <livewire:tenant-event-quick-actions />
         <x-mary-card title="Upcoming Events" class="w-1/3 mr-6" shadow separator>
             @foreach ($users as $user)
                 <x-mary-list-item :item="$user" />
