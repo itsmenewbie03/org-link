@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\TenantEventsController;
 use Illuminate\Support\Facades\Route;
+use Livewire\Livewire;
 use Livewire\Volt\Volt;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
@@ -45,4 +46,8 @@ Route::middleware([
     });
 
     Volt::route('/login', 'login')->name('tenant.login');
+
+    Livewire::setUpdateRoute(function ($handle) {
+        return Route::post('/livewire/update', $handle);
+    });
 });
