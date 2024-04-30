@@ -22,7 +22,11 @@ new class extends Component {
             'description' => 'required|min:10',
             // INFO: ensure start date is after today
             'start_date' => 'required|date|after:' . Carbon::now()->addHour()->format('Y-m-d H:i'),
-            'end_date' => 'required|date|after:start_date',
+            'end_date' =>
+                'required|date|after:' .
+                Carbon::parse($this->start_date)
+                    ->addHour(2)
+                    ->format('Y-m-d H:i'),
             'location' => 'required|min:5',
         ];
     }
@@ -35,6 +39,7 @@ new class extends Component {
             // NOTE:: events should be schedule at least a day before
             // but as non punctual person we allow it to be at least an hour xD
             'start_date.after' => 'Event must be at least an hour from now',
+            'end_date.after' => 'Event end date must be at least more than 2 hours from start date',
         ];
     }
 
