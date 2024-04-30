@@ -64,6 +64,17 @@ new class extends Component {
     @php
         $config2 = ['enableTime' => true, 'dateFormat' => 'Y-m-d H:i'];
     @endphp
+    <div class="text-lg breadcrumbs">
+        <ul>
+            <li>
+                <a href="{{ route('events.index') }}" wire:navigate>
+                    <x-mary-icon name="o-calendar-days" class="opacity-50" label="Events"
+                        link="{{ route('events.index') }}" />
+                </a>
+            </li>
+            <li><x-mary-icon name="o-calendar" label="Create Event" /></li>
+        </ul>
+    </div>
     <x-mary-card title="Create Event" class="w-full" shadow>
         <x-mary-form wire:submit="create_event">
             <x-mary-input label="Event Name" wire:model="name" icon="o-calendar-days" />
