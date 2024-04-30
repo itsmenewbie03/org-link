@@ -100,8 +100,7 @@
                         {{ getEventReminder($event->start_date) }}
                     </x-slot:sub-value>
                     <x-slot:actions>
-                        <x-mary-icon name="o-pencil" spinner />
-                        <x-mary-icon name="o-trash" class="text-red-500" spinner />
+                        <livewire:tenant-event-list-quick-actions :event="$event" />
                     </x-slot:actions>
                 </x-mary-list-item>
             @endforeach
