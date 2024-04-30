@@ -34,10 +34,11 @@
     @endphp
 
     @php
-
         $calendar_events = [];
         $events = App\Models\TenantEvents::all();
-
+        $upcoming_events = App\Models\TenantEvents::where('start_date', '>=', Carbon\Carbon::now())
+            ->orderBy('start_date', 'asc')
+            ->get();
         // NOTE: this transform the $events to match the desired input of the calendar component
         foreach ($events as $evt) {
             $evt->start_date = Carbon\Carbon::parse($evt->start_date);
@@ -61,7 +62,27 @@
             $calendar_events[] = $evt_transformed;
         }
     @endphp
+    @php
+        function getEventReminder(string $date): string
+        {
+            $eventDate = Carbon\Carbon::parse($date);
+            $now = Carbon\Carbon::now();
+            $daysDiff = $eventDate->diffInDays($now);
 
+            if ($daysDiff === 0) {
+                $hoursLeft = $eventDate->diffInHours($now);
+                if ($hoursLeft === 0) {
+                    return 'Event happening now!';
+                } else {
+                    $hourText = $hoursLeft === 1 ? 'hour' : 'hours';
+                    return "in $hoursLeft $hourText";
+                }
+            } else {
+                $dayText = $daysDiff === 1 ? 'day' : 'days';
+                return "in $daysDiff $dayText";
+            }
+        }
+    @endphp
     <div class="text-lg breadcrumbs">
         <ul>
             <li><x-mary-icon name="o-calendar-days" label="Events" /></li>
@@ -70,8 +91,19 @@
     <div class="w-full flex">
         <livewire:tenant-event-quick-actions />
         <x-mary-card title="Upcoming Events" class="w-1/3 mr-6" shadow separator>
-            @foreach ($events as $event)
-                <x-mary-list-item :item="$event" />
+            @foreach ($upcoming_events as $event)
+                <x-mary-list-item :item="$event" no-separator no-hover>
+                    <x-slot:value>
+                        {{ $event->name }}
+                    </x-slot:value>
+                    <x-slot:sub-value>
+                        {{ getEventReminder($event->start_date) }}
+                    </x-slot:sub-value>
+                    <x-slot:actions>
+                        <x-mary-icon name="o-pencil" spinner />
+                        <x-mary-icon name="o-trash" class="text-red-500" spinner />
+                    </x-slot:actions>
+                </x-mary-list-item>
             @endforeach
         </x-mary-card>
 
