@@ -2,6 +2,9 @@
 
 use Livewire\Volt\Component;
 use Mary\Traits\Toast;
+use App\Models\TenantEvents;
+use Carbon\Carbon;
+
 new class extends Component {
     use Toast;
 
@@ -14,17 +17,46 @@ new class extends Component {
     public function rules()
     {
         return [
-            'name' => 'required|min:5',
+            // INFO: ensure event name is unique
+            'name' => 'required|min:5|unique:events,name',
             'description' => 'required|min:10',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'location' => 'required',
+            // INFO: ensure start date is after today
+            'start_date' => 'required|date|after:' . Carbon::now()->addHour()->format('Y-m-d H:i'),
+            'end_date' => 'required|date|after:start_date',
+            'location' => 'required|min:5',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            // INFO: ensure event name is unique
+            'name.unique' => 'There is already an event with that name.',
+            // NOTE:: events should be schedule at least a day before
+            // but as non punctual person we allow it to be at least an hour xD
+            'start_date.after' => 'Event must be at least an hour from now',
         ];
     }
 
     public function create_event()
     {
-        $this->success('Event created successfully!\nJK xD');
+        $this->validate();
+        // NOTE: for some reason the DB is automatically switching
+        // I love it xD
+        $event = TenantEvents::create([
+            'name' => $this->name,
+            'description' => $this->description,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+            'location' => $this->location,
+        ]);
+        if ($event) {
+            $this->success('Event created successfully');
+            // INFO: clear the form after a successful create
+            $this->reset();
+        } else {
+            $this->error('Event creation failed');
+        }
     }
 }; ?>
 
