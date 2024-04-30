@@ -77,19 +77,19 @@ new class extends Component {
     </div>
     <x-mary-card title="Create Event" class="w-full" shadow>
         <x-mary-form wire:submit="create_event">
-            <x-mary-input label="Event Name" wire:model="name" icon="o-calendar-days" />
+            <x-mary-input label="Event Name" wire:model="name" icon="o-calendar-days" inline />
             <div class="flex gap-4">
                 <div class="flex-1">
                     <x-mary-datepicker class="w-full" label="Event Start Date" wire:model="start_date" icon="o-calendar"
-                        :config="$config2" />
+                        :config="$config2" inline />
                 </div>
                 <div class="flex-1">
                     <x-mary-datepicker class="flex-1" label="Event End Date" wire:model="end_date" icon="o-calendar"
-                        :config="$config2" />
+                        :config="$config2" inline />
                 </div>
             </div>
-            <x-mary-textarea label="Event Description" wire:model="description" icon="o-document-text" />
-            <x-mary-input label="Event Location" wire:model="location" icon="o-map-pin" />
+            <x-mary-textarea label="Event Description" wire:model="description" icon="o-document-text" inline />
+            <x-mary-input label="Event Location" wire:model="location" icon="o-map-pin" inline />
             <x-slot:actions>
                 <x-mary-button label="Cancel" link="{{ route('events.index') }}" />
                 <x-mary-button label="Create" icon="o-plus" class="btn-primary" type="submit" spinner />
