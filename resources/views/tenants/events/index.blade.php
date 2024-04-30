@@ -36,6 +36,12 @@
     @php
         $users = App\Models\User::take(3)->get();
     @endphp
+
+    <div class="text-lg breadcrumbs">
+        <ul>
+            <li><x-mary-icon name="o-calendar-days" label="Events" /></li>
+        </ul>
+    </div>
     <div class="w-full flex">
         <livewire:tenant-event-quick-actions />
         <x-mary-card title="Upcoming Events" class="w-1/3 mr-6" shadow separator>
