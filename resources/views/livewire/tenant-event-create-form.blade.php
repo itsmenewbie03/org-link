@@ -49,11 +49,11 @@ new class extends Component {
         // NOTE: for some reason the DB is automatically switching
         // I love it xD
         $event = TenantEvents::create([
-            'name' => $this->name,
-            'description' => $this->description,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
-            'location' => $this->location,
+            'name' => trim($this->name),
+            'description' => trim($this->description),
+            'start_date' => trim($this->start_date),
+            'end_date' => trim($this->end_date),
+            'location' => trim($this->location),
         ]);
         if ($event) {
             $this->success('Event created successfully');

@@ -2,6 +2,8 @@
 
 use Livewire\Volt\Component;
 use Mary\Traits\Toast;
+use App\Models\TenantEvents;
+
 new class extends Component {
     use Toast;
     public ?object $event = null;
@@ -15,13 +17,22 @@ new class extends Component {
 
     public function edit()
     {
-        $this->success('Edit ' . $this->event->name);
+        session()->flash('success', 'Event my ass deleted successfully');
+        return $this->redirect(route('events.index'), navigate: true);
     }
 
     public function delete()
     {
         $this->confirm_delete_modal = false;
-        $this->error('Delete ' . $this->event->name . 'failed because I\'m tired already xD');
+        // INFO: deleting the event
+        $delete = TenantEvents::where('id', $this->event->id)->delete();
+        if (!$delete) {
+            // NOTE: if the delete fails, 100% PHP bug xD
+            $this->error('Failed to delete event');
+            return;
+        }
+        session()->flash('success', 'Event ' . $this->event->name . ' deleted successfully');
+        return $this->redirect(route('events.index'), navigate: true);
     }
 
     public function confirm_delete()
