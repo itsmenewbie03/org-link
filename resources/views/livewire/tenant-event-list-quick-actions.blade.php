@@ -17,8 +17,7 @@ new class extends Component {
 
     public function edit()
     {
-        session()->flash('success', 'Event my ass deleted successfully');
-        return $this->redirect(route('events.index'), navigate: true);
+        return $this->redirect(route('events.edit', $this->event->id), navigate: true);
     }
 
     public function delete()
