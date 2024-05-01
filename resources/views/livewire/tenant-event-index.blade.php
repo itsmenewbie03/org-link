@@ -71,6 +71,13 @@ new class extends Component {
     @if (session('success'))
         {{ $this->toaster(session('success')) }}
     @endif
+
+    @if (session('error'))
+        <x-mary-alert class="alert-warning" icon="o-exclamation-triangle" dismissible>
+            {{ session('error') }}
+        </x-mary-alert>
+    @endif
+
     <div class="text-lg breadcrumbs">
         <ul>
             <li><x-mary-icon name="o-calendar-days" label="Events" /></li>
