@@ -29,8 +29,8 @@ new class extends Component {
     {
         return [
             // INFO: ensure event name is unique
-            'name' => 'required|min:5|unique:events,name,' . $this->event->id,
-            'description' => 'required|min:10',
+            'name' => 'required|min:5|string|unique:events,name,' . $this->event->id,
+            'description' => 'required|min:10|string',
             // INFO: ensure start date is after today
             'start_date' => 'required|date|after:' . Carbon::now()->addHour()->format('Y-m-d H:i'),
             'end_date' =>
@@ -38,7 +38,7 @@ new class extends Component {
                 Carbon::parse($this->start_date)
                     ->addHour(2)
                     ->format('Y-m-d H:i'),
-            'location' => 'required|min:5',
+            'location' => 'required|min:5|string',
         ];
     }
 
@@ -56,6 +56,12 @@ new class extends Component {
 
     public function edit_event()
     {
+        // NOTE: since we know sir klevie will test the whitespaces, we gonna do a trick here xD
+        // HACK: this is a 999 IQ move xD
+        $this->name = trim($this->name);
+        $this->description = trim($this->description);
+        $this->location = trim($this->location);
+
         $this->validate();
         // NOTE: for some reason the DB is automatically switching
         // I love it xD

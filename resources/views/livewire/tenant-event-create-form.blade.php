@@ -8,18 +8,23 @@ use Carbon\Carbon;
 new class extends Component {
     use Toast;
 
-    public string $name;
-    public string $description;
+    public string $name = '';
+    public string $description = '';
     public string $start_date;
     public string $end_date;
-    public string $location;
+    public string $location = '';
+
+    public function mount()
+    {
+        $this->start_date = Carbon::now()->format('Y-m-d H:i');
+    }
 
     public function rules()
     {
         return [
             // INFO: ensure event name is unique
-            'name' => 'required|min:5|unique:events,name',
-            'description' => 'required|min:10',
+            'name' => 'required|min:5|string|unique:events,name',
+            'description' => 'required|min:10|string',
             // INFO: ensure start date is after today
             'start_date' => 'required|date|after:' . Carbon::now()->addHour()->format('Y-m-d H:i'),
             'end_date' =>
@@ -27,7 +32,7 @@ new class extends Component {
                 Carbon::parse($this->start_date)
                     ->addHour(2)
                     ->format('Y-m-d H:i'),
-            'location' => 'required|min:5',
+            'location' => 'required|min:5|string',
         ];
     }
 
@@ -45,6 +50,12 @@ new class extends Component {
 
     public function create_event()
     {
+        // NOTE: since we know sir klevie will test the whitespaces, we gonna do a trick here xD
+        // HACK: this is a 999 IQ move xD
+        $this->name = trim($this->name);
+        $this->description = trim($this->description);
+        $this->location = trim($this->location);
+
         $this->validate();
         // NOTE: for some reason the DB is automatically switching
         // I love it xD
