@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TenantEvents;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class TenantEventsController extends Controller
@@ -42,9 +44,13 @@ class TenantEventsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id): void
+    public function edit(string $id): RedirectResponse|View|Factory
     {
-        //
+        $event = TenantEvents::find($id);
+        if (!$event) {
+            return redirect(route('events.index'))->with('error', 'You cannot edit an event that does not exist in the database.');
+        }
+        return view("tenants.events.edit", ["event" => $event]);
     }
 
     /**
