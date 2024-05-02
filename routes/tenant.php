@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\TenantAttendanceController;
 use App\Http\Controllers\TenantEventsController;
 use App\Http\Middleware\TenantAdmin;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,8 @@ Route::middleware([
     Route::middleware(['auth'])->group(function () {
         Route::resource("/users", TenantUsersController::class)->middleware(TenantAdmin::class);
         Route::resource("/events", TenantEventsController::class);
+        Route::get("/attendance/start", [TenantAttendanceController::class,'start'])->name('attendance.start');
+        Route::resource("/attendance", TenantAttendanceController::class);
     });
 
     Volt::route('/login', 'login')->name('tenant.login');
