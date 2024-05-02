@@ -9,7 +9,7 @@ new class extends Component {
     public $calendar_events = [];
     public $events = [];
 
-    public function boot()
+    public function mount()
     {
         $this->events = App\Models\TenantEvents::all();
         $this->upcoming_events = App\Models\TenantEvents::where('start_date', '>=', Carbon\Carbon::now())->orderBy('start_date', 'asc')->get();
@@ -73,8 +73,14 @@ new class extends Component {
     @endif
 
     @if (session('error'))
-        <x-mary-alert class="alert-warning" icon="o-exclamation-triangle" dismissible>
+        <x-mary-alert class="alert-error" icon="o-exclamation-triangle" dismissible>
             {{ session('error') }}
+        </x-mary-alert>
+    @endif
+
+    @if (session('warning'))
+        <x-mary-alert class="alert-warning" icon="o-exclamation-triangle" dismissible>
+            {{ session('warning') }}
         </x-mary-alert>
     @endif
 
@@ -87,7 +93,8 @@ new class extends Component {
         <x-mary-card title="Quick Actions" class="w-1/3 mr-6" shadow separator>
             <x-mary-menu>
                 <x-mary-menu-item title="New Event" icon="o-plus" link="{{ route('events.create') }}" />
-                <x-mary-menu-item title="Start Attendance" icon="o-list-bullet" />
+                <x-mary-menu-item title="Start Attendance" icon="o-list-bullet"
+                    link="{{ route('attendance.index') }}" />
             </x-mary-menu>
         </x-mary-card>
         <x-mary-card title="Upcoming Events" class="w-1/3 mr-6" shadow separator>
