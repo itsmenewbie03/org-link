@@ -75,6 +75,13 @@ new class extends Component {
             <x-mary-button label="Yes, Delete this User" icon="o-check" class="btn-primary" wire:click="delete_user" />
         </x-slot:actions>
     </x-mary-modal>
+
+    <div class="text-lg breadcrumbs">
+        <ul>
+            <li><x-mary-icon name="o-users" label="Users" /></li>
+        </ul>
+    </div>
+
     <x-mary-card title="Users">
         <x-slot:menu>
             <livewire:tenant-users-add-user />
