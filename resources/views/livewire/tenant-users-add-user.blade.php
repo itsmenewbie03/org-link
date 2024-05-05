@@ -5,6 +5,7 @@ use Mary\Traits\Toast;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\Rules\Password;
+use App\Models\TenantUser;
 
 new class extends Component {
     use Toast;
@@ -26,16 +27,21 @@ new class extends Component {
 
     public function create_user()
     {
-        smart_db_hack();
         $this->validate();
-        $user = DB::table('users')->insert([
+        // $user = DB::table('users')->insert([
+        //     'name' => $this->name,
+        //     'email' => $this->email,
+        //     'password' => bcrypt($this->password),
+        //     // NOTE: we will only have two roles `admin` and `user`
+        //     'role' => 'user',
+        //     'created_at' => now(),
+        //     'updated_at' => now(),
+        // ]);
+        $user = TenantUser::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => bcrypt($this->password),
-            // NOTE: we will only have two roles `admin` and `user`
             'role' => 'user',
-            'created_at' => now(),
-            'updated_at' => now(),
         ]);
         $this->reset();
         $this->myModal2 = false;
