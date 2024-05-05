@@ -51,7 +51,14 @@ Route::middleware([
 
     Volt::route('/login', 'login')->name('tenant.login');
 
+    // NOTE: this right here is crucial in making livewire components
+    // be able to utilize the `tenant` helper function
+
+    // TODO:
+    // check if refactoring is possible in favor https://github.com/itsmenewbie03/org-link/pull/4
+    // it currently works but the code is a bit messy
     Livewire::setUpdateRoute(function ($handle) {
         return Route::post('/livewire/update', $handle);
     });
+
 });
