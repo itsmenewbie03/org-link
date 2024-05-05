@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
 use Livewire\Volt\Volt;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
-use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
+use App\Http\Middleware\BlockAccessFromCentralDomainExcept;
 use App\Http\Controllers\TenantUsersController;
 
 /*
@@ -23,11 +23,17 @@ use App\Http\Controllers\TenantUsersController;
 | Feel free to customize them however you want. Good luck!
 |
 */
+// NOTE: idk which is a better place to put this but this should work for now xD
+\Stancl\Tenancy\Middleware\InitializeTenancyByDomain::$onFail = function ($exception, $request, $next) {
+    if($request->path() === 'livewire/update') {
+        return $next($request);
+    }
+};
 
 Route::middleware([
     'web',
     InitializeTenancyByDomain::class,
-    PreventAccessFromCentralDomains::class,
+    BlockAccessFromCentralDomainExcept::class,
 ])->group(function () {
 
     Route::get('/', function () {
