@@ -13,7 +13,7 @@ class TenantEvents extends Model
     // and each tenants got their own db
     protected $table = 'events';
 
-    // NOTE: thanks copilot for saving me from typing all of this xD
+    // NOTE: thanks copilot for saving me time from typing all of this xD
     protected $fillable = [
         'name',
         'description',
