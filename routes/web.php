@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Mail\TenantWelcomeEmail;
 use App\Models\Tenant;
 use Illuminate\Support\Facades\Route;
