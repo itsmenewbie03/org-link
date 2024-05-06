@@ -49,18 +49,19 @@ new class extends Component {
                 return;
             }
             // INFO: retry download after loading the attendance list
-            $this->download_attendance_list();
-            return;
+            return $this->download_attendance_list();
         }
         $attendances = $this->attendances->toArray();
         // INFO: get selected event name
         $event = $this->events->where('id', $this->event_id)->first()->name;
-        $handle = fopen($event . '_Attendance_' . now() . '.csv', 'w');
+        $fname = $event . '_Attendance_' . now() . '.csv';
+        $handle = fopen($fname, 'w');
+        // TODO: improve the output format
         foreach ($attendances as $row) {
             fputcsv($handle, $row);
         }
         fclose($handle);
-        $this->success('Attendance list downloaded successfully.');
+        return response()->download($fname, $fname)->deleteFileAfterSend(true);
     }
 }; ?>
 
