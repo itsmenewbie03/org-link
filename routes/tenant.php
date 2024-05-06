@@ -52,6 +52,7 @@ Route::middleware([
         Route::resource("/users", TenantUsersController::class)->middleware(TenantAdmin::class);
         Route::resource("/events", TenantEventsController::class);
         Route::get("/attendance/start", [TenantAttendanceController::class,'start'])->name('attendance.start');
+        Route::get("/attendance/list", [TenantAttendanceController::class,'list'])->name('attendance.list');
         Route::resource("/attendance", TenantAttendanceController::class);
     });
 
