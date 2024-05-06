@@ -19,5 +19,6 @@ class TenantAttendance extends Model
         'email',
         'course',
         'year_level',
+        'event_id'
     ];
 }
