@@ -60,8 +60,11 @@
                         <x-mary-menu-item title="Users" icon="o-users" link="{{ route('users.index') }}" />
                     @endif
                     <x-mary-menu-item title="Events" icon="o-calendar-days" link="{{ route('events.index') }}" />
-                    <x-mary-menu-item title="Attendance" icon="o-clipboard-document-list"
-                        link="{{ route('attendance.index') }}" />
+                    <x-mary-menu-sub title="Attendance" icon="o-clipboard-document-list">
+                        <x-mary-menu-item title="Start Attendance" icon="o-rocket-launch"
+                            link="{{ route('attendance.index') }}" />
+                        <x-mary-menu-item title="View Attendances" icon="o-document-text" link="####" />
+                    </x-mary-menu-sub>
                 @endif
                 {{-- INFO: this will be available only to central apps --}}
                 {{-- INFO: this done through checking if tenant is null --}}
