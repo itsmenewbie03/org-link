@@ -25,6 +25,19 @@ class TenantAttendanceController extends Controller
     }
 
     /**
+    * Show attendance list.
+    * Why custom route? Because this is my CODEBASE xD
+    * make your own JK xD
+    */
+    public function list(Request $request): RedirectResponse|View|Factory
+    {
+        $events = TenantEvents::all();
+        return view('tenants.attendance.list', compact('events'));
+    }
+
+
+
+    /**
      * Display a listing of the resource.
      */
     public function index(): View|Factory
