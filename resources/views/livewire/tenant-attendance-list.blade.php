@@ -38,19 +38,7 @@ new class extends Component {
             $this->error('Please select an event to download attendance list.');
             return;
         }
-        // NOTE: no toArray is needed here as initially this is an empty array
-        if (empty($this->attendances)) {
-            // NOTE: we will allow download without loading the attendance list
-            // coz we "love" our user xD
-            $this->load_event_attendance();
-            // NOTE: to avoid infinite loop we will check if the list is still empty
-            if (empty($this->attendances->toArray())) {
-                $this->error('No attendance list found for the selected event.');
-                return;
-            }
-            // INFO: retry download after loading the attendance list
-            return $this->download_attendance_list();
-        }
+        $this->load_event_attendance();
         $attendances = $this->attendances->toArray();
         // INFO: get selected event name
         $event = $this->events->where('id', $this->event_id)->first()->name;
@@ -60,14 +48,13 @@ new class extends Component {
         // NOTE: add headers
         fputcsv($handle, ['Name', 'Email', 'Course', 'Year', 'Attendance Time']);
         foreach ($attendances as $row) {
-            $row['attendance_time'] = $row['attended_at'];
-            unset($row['id']);
-            unset($row['event_id']);
-            unset($row['year_level']);
-            unset($row['created_at']);
-            unset($row['updated_at']);
-            unset($row['attended_at']);
-            fputcsv($handle, $row);
+            $out = [];
+            $out['name'] = $row['name'];
+            $out['email'] = $row['email'];
+            $out['course'] = $row['course'];
+            $out['year'] = $row['year'];
+            $out['attendance_time'] = $row['attended_at'];
+            fputcsv($handle, $out);
         }
         fclose($handle);
         return response()->download($fname, $fname)->deleteFileAfterSend(true);
