@@ -63,9 +63,9 @@
                     <x-mary-menu-sub title="Attendance" icon="o-clipboard-document-list">
                         {{-- FIX: currently when viewing attendance list Start Attendance item also gets active --}}
                         <x-mary-menu-item title="Start Attendance" icon="o-rocket-launch"
-                            link="{{ route('attendance.index') }}" active />
+                            link="{{ route('attendance.index') }}" route="attendance.start" />
                         <x-mary-menu-item title="View Attendances" icon="o-document-text"
-                            link="{{ route('attendance.list') }}" />
+                            link="{{ route('attendance.list') }}" route="attendance.list" />
                     </x-mary-menu-sub>
                 @endif
                 {{-- INFO: this will be available only to central apps --}}
