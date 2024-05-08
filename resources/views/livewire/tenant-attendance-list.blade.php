@@ -57,7 +57,16 @@ new class extends Component {
         $fname = $event . '_Attendance_' . now() . '.csv';
         $handle = fopen($fname, 'w');
         // TODO: improve the output format
+        // NOTE: add headers
+        fputcsv($handle, ['Name', 'Email', 'Course', 'Year', 'Attendance Time']);
         foreach ($attendances as $row) {
+            $row['attendance_time'] = $row['attended_at'];
+            unset($row['id']);
+            unset($row['event_id']);
+            unset($row['year_level']);
+            unset($row['created_at']);
+            unset($row['updated_at']);
+            unset($row['attended_at']);
             fputcsv($handle, $row);
         }
         fclose($handle);
