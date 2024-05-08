@@ -40,6 +40,10 @@ new class extends Component {
         }
         $this->load_event_attendance();
         $attendances = $this->attendances->toArray();
+        if (empty($attendances)) {
+            $this->error('No attendance list found for the selected event.');
+            return;
+        }
         // INFO: get selected event name
         $event = $this->events->where('id', $this->event_id)->first()->name;
         $fname = $event . '_Attendance_' . now() . '.csv';
