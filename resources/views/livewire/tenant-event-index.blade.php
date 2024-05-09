@@ -114,8 +114,7 @@ new class extends Component {
         </x-mary-card>
 
         <x-mary-card title="Monthly Events Calendar" class="w-fit" shadow separator>
-            {{-- TODO: get rid of this ugly config call --}}
-            <x-mary-calendar locale="en-PH" :events="$this->calendar_events" weekend-highlight :config="['settings' => ['iso8601' => false]]" />
+            <x-mary-calendar locale="en-PH" :events="$this->calendar_events" weekend-highlight sunday-start />
         </x-mary-card>
     </div>
 </div>
