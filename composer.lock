@@ -2335,16 +2335,16 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.4.11",
+            "version": "v3.4.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "8a78d0c3ae9b4c96a2d8932ea4ac0dc782325de0"
+                "reference": "54dd265c17f7b5200627eb9690590e7cbbad1027"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/8a78d0c3ae9b4c96a2d8932ea4ac0dc782325de0",
-                "reference": "8a78d0c3ae9b4c96a2d8932ea4ac0dc782325de0",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/54dd265c17f7b5200627eb9690590e7cbbad1027",
+                "reference": "54dd265c17f7b5200627eb9690590e7cbbad1027",
                 "shasum": ""
             },
             "require": {
@@ -2359,7 +2359,7 @@
             },
             "require-dev": {
                 "calebporzio/sushi": "^2.1",
-                "laravel/framework": "^10.0|^11.0",
+                "laravel/framework": "^10.15.0|^11.0",
                 "laravel/prompts": "^0.1.6",
                 "mockery/mockery": "^1.3.1",
                 "orchestra/testbench": "^8.21.0|^9.0",
@@ -2399,7 +2399,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.4.11"
+                "source": "https://github.com/livewire/livewire/tree/v3.4.12"
             },
             "funding": [
                 {
@@ -2407,7 +2407,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-24T12:14:15+00:00"
+            "time": "2024-05-02T17:10:37+00:00"
         },
         {
             "name": "livewire/volt",
@@ -3774,16 +3774,16 @@
         },
         {
             "name": "robsontenorio/mary",
-            "version": "1.30.3",
+            "version": "1.30.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/robsontenorio/mary.git",
-                "reference": "bc008463f1d7c91ee93c808ab54f935fb00f410e"
+                "reference": "0556e804bc9afd63f3578d632444dbe65e77f6c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/robsontenorio/mary/zipball/bc008463f1d7c91ee93c808ab54f935fb00f410e",
-                "reference": "bc008463f1d7c91ee93c808ab54f935fb00f410e",
+                "url": "https://api.github.com/repos/robsontenorio/mary/zipball/0556e804bc9afd63f3578d632444dbe65e77f6c1",
+                "reference": "0556e804bc9afd63f3578d632444dbe65e77f6c1",
                 "shasum": ""
             },
             "require": {
@@ -3849,7 +3849,7 @@
             ],
             "support": {
                 "issues": "https://github.com/robsontenorio/mary/issues",
-                "source": "https://github.com/robsontenorio/mary/tree/1.30.3"
+                "source": "https://github.com/robsontenorio/mary/tree/1.30.5"
             },
             "funding": [
                 {
@@ -3857,7 +3857,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-27T14:14:56+00:00"
+            "time": "2024-05-08T21:09:21+00:00"
         },
         {
             "name": "stancl/jobpipeline",
