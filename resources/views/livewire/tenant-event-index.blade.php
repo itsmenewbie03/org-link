@@ -89,6 +89,7 @@ new class extends Component {
             <li><x-mary-icon name="o-calendar-days" label="Events" /></li>
         </ul>
     </div>
+
     <div class="w-full flex">
         <x-mary-card title="Quick Actions" class="w-1/3 mr-6" shadow separator>
             <x-mary-menu>

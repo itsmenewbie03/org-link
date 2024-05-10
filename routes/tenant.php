@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\TenantAttendanceController;
+use App\Http\Controllers\TenantCustomizationController;
 use App\Http\Controllers\TenantEventsController;
 use App\Http\Middleware\TenantAdmin;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +55,7 @@ Route::middleware([
         Route::get("/attendance/start", [TenantAttendanceController::class,'start'])->name('attendance.start');
         Route::get("/attendance/list", [TenantAttendanceController::class,'list'])->name('attendance.list');
         Route::resource("/attendance", TenantAttendanceController::class);
+        Route::get("/customizations/theme", [TenantCustomizationController::class,'theme'])->name('customizations.theme');
     });
 
     Volt::route('/login', 'login')->name('tenant.login');
