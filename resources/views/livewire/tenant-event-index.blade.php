@@ -89,6 +89,18 @@ new class extends Component {
             <li><x-mary-icon name="o-calendar-days" label="Events" /></li>
         </ul>
     </div>
+
+    @php
+        $themes = [
+            ['value' => 'dark', 'label' => 'Dark'],
+            ['value' => 'lofi', 'label' => 'Lofi'],
+            ['value' => 'forest', 'label' => 'Forest'],
+        ];
+    @endphp
+
+    <x-mary-select data-choose-theme data-key="mary-theme" label="master user" icon="o-user" option-value="value"
+        option-label="label" :options="$themes" wire:model="selecteduser" />
+
     <div class="w-full flex">
         <x-mary-card title="Quick Actions" class="w-1/3 mr-6" shadow separator>
             <x-mary-menu>

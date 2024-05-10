@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    {{-- INFO: this is for the theme changer --}}
+    <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
+
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->

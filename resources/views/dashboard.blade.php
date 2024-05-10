@@ -16,7 +16,6 @@
                     <x-mary-button icon="o-plus" class="btn-primary" />
                 </x-slot:actions>
             </x-mary-header>
-            <x-mary-theme-toggle darkTheme="lofi" lightTheme="lofi" />
         @else
             @yield('content')
         @endif
