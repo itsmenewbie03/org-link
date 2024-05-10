@@ -4,9 +4,9 @@ use App\Livewire\Actions\Logout;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
 
-new class extends Component
-{
+new class extends Component {
     public string $password = '';
+    public bool $delete_modal = false;
 
     /**
      * Delete the currently authenticated user.
@@ -16,6 +16,11 @@ new class extends Component
         $this->validate([
             'password' => ['required', 'string', 'current_password'],
         ]);
+
+        if (Auth::user()->role === 'admin') {
+            $this->addError('password', __('Admin account cannot be deleted.'));
+            return;
+        }
 
         tap(Auth::user(), $logout(...))->delete();
 
@@ -34,12 +39,11 @@ new class extends Component
         </p>
     </header>
 
-    <x-danger-button
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Delete Account') }}</x-danger-button>
+    <x-danger-button x-data=""
+        @click="$wire.delete_modal = true">{{ __('Delete Account') }}</x-danger-button>
 
-    <x-modal name="confirm-user-deletion" :show="$errors->isNotEmpty()" focusable>
+    <x-mary-modal wire:model="delete_modal" name="confirm-user-deletion" :show="$errors->isNotEmpty()" focusable persistent
+        class="backdrop-blur">
         <form wire:submit="deleteUser" class="p-6">
 
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
@@ -53,20 +57,14 @@ new class extends Component
             <div class="mt-6">
                 <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
 
-                <x-text-input
-                    wire:model="password"
-                    id="password"
-                    name="password"
-                    type="password"
-                    class="mt-1 block w-3/4"
-                    placeholder="{{ __('Password') }}"
-                />
+                <x-text-input wire:model="password" id="password" name="password" type="password"
+                    class="mt-1 block w-3/4" placeholder="{{ __('Password') }}" />
 
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
             <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
+                <x-secondary-button @click="$wire.delete_modal = false">
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
@@ -75,5 +73,5 @@ new class extends Component
                 </x-danger-button>
             </div>
         </form>
-    </x-modal>
+    </x-mary-modal>
 </section>
