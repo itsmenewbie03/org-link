@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     {{-- INFO: this is for the theme changer --}}
     <script src="https://cdn.jsdelivr.net/npm/theme-change@2.0.2/index.js"></script>
 
@@ -68,6 +67,9 @@
                             link="{{ route('attendance.index') }}" route="attendance.start" />
                         <x-mary-menu-item title="View Attendances" icon="o-document-text"
                             link="{{ route('attendance.list') }}" route="attendance.list" />
+                    </x-mary-menu-sub>
+                    <x-mary-menu-sub title="Customizations" icon="o-wrench-screwdriver">
+                        <x-mary-menu-item title="Theme" icon="o-sparkles" link="{{ route('customizations.theme') }}" />
                     </x-mary-menu-sub>
                 @endif
                 {{-- INFO: this will be available only to central apps --}}
