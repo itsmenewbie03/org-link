@@ -16,6 +16,7 @@
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.6",
         "robsontenorio/mary": "^1.30",
+        "salahhusa9/laravel-updater": "^1.2",
         "stancl/tenancy": "^3.8"
     },
     "require-dev": {
@@ -69,7 +70,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "phpstan/extension-installer": true
         }
     },
     "minimum-stability": "stable",
