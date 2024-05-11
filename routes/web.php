@@ -17,9 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::get('dashboard', function (\Codedge\Updater\UpdaterManager $updater) {
+    if($updater->source()->isNewVersionAvailable()) {
+        $versionAvailable = $updater->source()->getVersionAvailable();
+        return view('dashboard', ["newVersion" => $versionAvailable,"currentVersion" => $updater->source()->getVersionInstalled()]);
+    }
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
@@ -33,26 +37,13 @@ Route::get("/mail", function () {
 });
 
 Route::get('/update', function (\Codedge\Updater\UpdaterManager $updater) {
-
-    // Check if new version is available
     if($updater->source()->isNewVersionAvailable()) {
-
-        // Get the current installed version
-        echo $updater->source()->getVersionInstalled();
-
-        // Get the new version available
         $versionAvailable = $updater->source()->getVersionAvailable();
-
-        // Create a release
         $release = $updater->source()->fetch($versionAvailable);
-
-        // Run the update process
         $updater->source()->update($release);
-
     } else {
         echo "No new version available.";
     }
-
-})->middleware(['auth']);
+})->middleware(['auth'])->name("update");
 
 require __DIR__.'/auth.php';
