@@ -7,15 +7,6 @@
 
     <div class="py-12">
         @sectionMissing('content')
-            @if ($newVersion)
-                <x-mary-alert icon="o-arrow-path" class="alert-success mb-4" title="Update available"
-                    description="OrgLink has been updated to version {{ $newVersion }}. You are using version {{ $currentVersion }}.">
-                    <x-slot:actions>
-                        {{-- NOTE: Do a Hard Reload Coz Why Not? --}}
-                        <x-mary-button label="Update" link="{{ route('update') }}" no-wire-navigate />
-                    </x-slot:actions>
-                </x-mary-alert>
-            @endif
             <x-mary-header title="OrgLink" subtitle="Introducing deez to the world!">
                 <x-slot:middle class="!justify-end">
                     <x-mary-input icon="o-magnifying-glass" placeholder="Search..." />
