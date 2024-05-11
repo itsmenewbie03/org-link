@@ -26,8 +26,8 @@ new class extends Component {
             <x-mary-button icon="o-arrow-path" class="btn-ghost" label="Refresh" link="{{ route('customizations.theme') }}"
                 no-wire-navigate />
         </x-slot:menu>
-        <x-mary-select data-choose-theme icon="o-sparkles" option-value="value" option-label="label" :options="$this->themes"
-            inline
+        <x-mary-select data-choose-theme icon="o-sparkles" label="Theme" option-value="value" option-label="label"
+            :options="$this->themes" inline
             hint="Explore more themes! Change your device's settings to unlock new options. Click refresh after changing." />
     </x-mary-card>
     @script
