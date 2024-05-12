@@ -19,7 +19,7 @@ use Salahhusa9\Updater\Facades\Updater;
 Route::view('/', 'welcome');
 
 Route::get("/dashboard", function () {
-    return view('dashboard', ['update_result' => session('update_result')]);
+    return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::view('profile', 'profile')
@@ -35,7 +35,8 @@ Route::get("/mail", function () {
 
 Route::get('update', function () {
     $update_result = Updater::update();
-    return redirect()->route('dashboard')->with('update_result', $update_result);
+    session()->flash('update_result', $update_result);
+    return redirect()->route('dashboard');
 })->name("update");
 
 require __DIR__.'/auth.php';

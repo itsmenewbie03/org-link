@@ -14,8 +14,10 @@
         @if (is_null(tenant('id')))
             @if (Route::current()->getName() === 'dashboard')
 
-                @if (isset($update_result))
-                    <x-mary-alert class="alert-info" icon="o-arrow-path" title="{{ $update_result }}" dismissible />
+                @if (session()->has('update_result'))
+                    <x-mary-alert class="alert-info" icon="o-arrow-path" title="{{ session('update_result') }}"
+                        dismissible />
+                    {{ session()->forget('update_result') }}
                 @endif
 
                 @if (is_array(Updater::newVersionAvailable()))
