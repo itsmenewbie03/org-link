@@ -6,6 +6,19 @@
     </x-slot>
 
     <div class="py-12">
+        @if (is_array(Updater::newVersionAvailable()))
+            @php
+                $update = Updater::newVersionAvailable();
+                $current_version = $update['current_version'];
+                $latest_version = $update['latest_version'];
+            @endphp
+            <x-mary-alert class="alert-success" icon="o-arrow-path" title="Update available"
+                description="OrgLink is updated to {{ $latest_version }}. You are currently using {{ $current_version }}">
+                <x-slot name="actions">
+                    <x-mary-button link="{{ route('update') }}" label="Update" />
+                </x-slot>
+            </x-mary-alert>
+        @endif
         @sectionMissing('content')
             <x-mary-header title="OrgLink" subtitle="Introducing deez to the world!">
                 <x-slot:middle class="!justify-end">
