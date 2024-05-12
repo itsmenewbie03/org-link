@@ -1,8 +1,12 @@
 <?php
 
 use Livewire\Volt\Component;
+use Salahhusa9\Updater\Helpers\Git;
+use Mary\Traits\Toast;
 
 new class extends Component {
+    use Toast;
+
     public $versions = [];
     public $selected_version = null;
     public function boot()
@@ -19,9 +23,15 @@ new class extends Component {
     }
     public function update()
     {
-        dd($this->selected_version);
-        // WARN: I WON'T TRY TO IMPLEMENT IT HERE I MIGHT LOSE
-        // MY PROGRESS
+        if (Updater::getCurrentVersion() == 'main') {
+            $this->error('This feature is not allowed in the bleeding edge version.');
+            return;
+        }
+        Artisan::call('down');
+        Git::checkout($this->selected_version);
+        Artisan::call('up');
+        session()->flash('update_result', 'Now using ' . $this->selected_version);
+        return $this->redirect(route('dashboard'));
     }
 }; ?>
 
