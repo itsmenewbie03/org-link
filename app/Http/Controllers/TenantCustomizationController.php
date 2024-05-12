@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class TenantCustomizationController extends Controller
@@ -11,8 +12,12 @@ class TenantCustomizationController extends Controller
     /**
     * Custom method for theme customization
     */
-    public function theme(Request $request): View|Factory
+    public function theme(Request $request): RedirectResponse|View|Factory
     {
+        if(tenant('plan') == 'nano') {
+            return redirect()->route('dashboard')->with('error_message', 'You need to upgrade your plan to access this feature.');
+        }
+
         if(is_null($request->input("prefersDarkMode"))) {
             return view('tenants.customizations.init');
         }

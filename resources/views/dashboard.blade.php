@@ -1,4 +1,4 @@
-<x-app-l <x-app-layout>
+<x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Dashboard') }}
@@ -6,6 +6,10 @@
     </x-slot>
 
     <div class="py-12">
+        @if (session()->has('error_message'))
+            <x-mary-alert class="alert-error" icon="o-exclamation-triangle" title="{{ session('error_message') }}"
+                dismissible />
+        @endif
         {{-- NOTE: we will only check for updates if were on the dashboard route of the central app --}}
         @if (is_null(tenant('id')))
             @if (Route::current()->getName() === 'dashboard')
@@ -74,5 +78,4 @@
             @yield('content')
         @endif
     </div>
-    </x-app-layout>
-    ayout>
+</x-app-layout>
