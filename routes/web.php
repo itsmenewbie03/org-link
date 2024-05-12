@@ -3,6 +3,7 @@
 use App\Mail\TenantWelcomeEmail;
 use App\Models\Tenant;
 use Illuminate\Support\Facades\Route;
+use Salahhusa9\Updater\Facades\Updater;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,12 @@ Route::resource('/tenants', \App\Http\Controllers\TenantController::class)->midd
 // TEST: mail preview
 Route::get("/mail", function () {
     return new TenantWelcomeEmail(new Tenant(), "deeznuts");
+});
+
+Route::get('update', function () {
+    dump(Updater::getCurrentVersion());
+    dump(Updater::getLatestVersion());
+    dump(Updater::update());
 });
 
 require __DIR__.'/auth.php';
