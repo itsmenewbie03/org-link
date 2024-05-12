@@ -27,7 +27,7 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 Route::resource('/tenants', \App\Http\Controllers\TenantController::class)->middleware(['auth']);
-
+Route::resource('/experimentals', \App\Http\Controllers\ExperimentalFeaturesController::class)->middleware(['auth']);
 // TEST: mail preview
 Route::get("/mail", function () {
     return new TenantWelcomeEmail(new Tenant(), "deeznuts");

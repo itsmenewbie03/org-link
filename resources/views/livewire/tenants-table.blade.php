@@ -122,7 +122,11 @@ new class extends Component {
         ];
     @endphp
     {{-- You can use any `$wire.METHOD` on `@row-click` --}}
-
+    <div class="text-lg breadcrumbs">
+        <ul>
+            <li><x-mary-icon name="o-users" label="Tenants" /></li>
+        </ul>
+    </div>
     <x-mary-card title="Tenants">
         <x-slot:menu>
             <x-mary-button icon="o-user-plus" class="btn-ghost" label="Add Tenant" @click="$wire.myModal2 = true"
