@@ -27,11 +27,17 @@ new class extends Component {
             $this->error('This feature is not allowed in the bleeding edge version.');
             return;
         }
+
+        if ($this->selected_version == null) {
+            $this->error('Please select a version.');
+            return;
+        }
+
         Artisan::call('down');
         Git::checkout($this->selected_version);
         Artisan::call('up');
         session()->flash('update_result', 'Now using ' . $this->selected_version);
-        return $this->redirect(route('dashboard'));
+        return $this->redirectRoute('dashboard');
     }
 }; ?>
 
@@ -42,9 +48,9 @@ new class extends Component {
         </ul>
     </div>
     <x-mary-card title="Experimental Features">
-        <x-mary-select label="Select a version" placeholder="Latest" icon="iconpark.branchtwo-o" :options="$this->versions"
+        <x-mary-select label="Version" placeholder="Select a version ..." icon="iconpark.branchtwo-o" :options="$this->versions"
             wire:model="selected_version" inline
-            hint="Select specific version you want to use. This is still experimental be careful.">
+            hint="Choose the specific version you want to use. This is still experimental be careful.">
             <x-slot:append>
                 <x-mary-button label="Start" icon="o-rocket-launch" class="rounded-l-none btn-primary h-full"
                     wire:click="update" />
