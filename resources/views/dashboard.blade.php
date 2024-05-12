@@ -6,22 +6,28 @@
     </x-slot>
 
     <div class="py-12">
-        @if (isset($update_result))
-            <x-mary-alert class="alert-info" icon="o-arrow-path" title="{{ $update_result }}" dismissible />
-        @endif
+        {{-- NOTE: we will only check for updates if were on the dashboard route of the central app --}}
+        @if (is_null(tenant('id')))
+            @if (Route::current()->getName() === 'dashboard')
 
-        @if (is_array(Updater::newVersionAvailable()))
-            @php
-                $update = Updater::newVersionAvailable();
-                $current_version = $update['current_version'];
-                $latest_version = $update['latest_version'];
-            @endphp
-            <x-mary-alert class="alert-success" icon="o-arrow-path" title="Update available"
-                description="OrgLink is updated to {{ $latest_version }}. You are currently using {{ $current_version }}">
-                <x-slot name="actions">
-                    <x-mary-button link="{{ route('update') }}" label="Update" />
-                </x-slot>
-            </x-mary-alert>
+                @if (isset($update_result))
+                    <x-mary-alert class="alert-info" icon="o-arrow-path" title="{{ $update_result }}" dismissible />
+                @endif
+
+                @if (is_array(Updater::newVersionAvailable()))
+                    @php
+                        $update = Updater::newVersionAvailable();
+                        $current_version = $update['current_version'];
+                        $latest_version = $update['latest_version'];
+                    @endphp
+                    <x-mary-alert class="alert-success" icon="o-arrow-path" title="Update available"
+                        description="OrgLink is updated to {{ $latest_version }}. You are currently using {{ $current_version }}">
+                        <x-slot name="actions">
+                            <x-mary-button link="{{ route('update') }}" label="Update" />
+                        </x-slot>
+                    </x-mary-alert>
+                @endif
+            @endif
         @endif
 
         @sectionMissing('content')
