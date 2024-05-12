@@ -18,9 +18,9 @@ use Salahhusa9\Updater\Facades\Updater;
 
 Route::view('/', 'welcome');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::get("/dashboard", function () {
+    return view('dashboard', ['update_result' => session('update_result')]);
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])

@@ -6,8 +6,8 @@
     </x-slot>
 
     <div class="py-12">
-        @if (!is_null(session('update_result')))
-            <x-mary-alert class="alert-info" icon="o-arrow-path" title="{{ session('update_result') }}" dismissible />
+        @if (isset($update_result))
+            <x-mary-alert class="alert-info" icon="o-arrow-path" title="{{ $update_result }}" dismissible />
         @endif
 
         @if (is_array(Updater::newVersionAvailable()))
@@ -25,7 +25,7 @@
         @endif
 
         @sectionMissing('content')
-            <x-mary-header title="OrgLink" subtitle="Introducing deez to the world!">
+            <x-mary-header title="OrgLink" subtitle="{{ Updater::getCurrentVersion() }}">
                 <x-slot:middle class="!justify-end">
                     <x-mary-input icon="o-magnifying-glass" placeholder="Search..." />
                 </x-slot:middle>
