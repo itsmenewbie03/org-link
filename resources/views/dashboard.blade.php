@@ -74,8 +74,9 @@
                 <x-mary-stat title="Lost" description="This month" value="34" icon="o-arrow-trending-down"
                     tooltip-left="Ops!" />
 
-                <x-mary-stat title="Sales" description="This month" value="22.124" icon="o-arrow-trending-down"
-                    class="text-orange-500" color="text-pink-500" tooltip-right="Gosh!" />
+                <x-mary-stat title="Current Version" description="Latest: {{ Updater::getLatestVersion() }}"
+                    value="{{ Updater::getCurrentVersion() }}" icon="o-sparkles" class="text-orange-500"
+                    color="text-pink-500" tooltip-bottom="Stay Updated!" />
             </div>
         @else
             @yield('content')
