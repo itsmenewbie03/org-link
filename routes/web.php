@@ -34,9 +34,7 @@ Route::get("/mail", function () {
 });
 
 Route::get('update', function () {
-    dump(Updater::getCurrentVersion());
-    dump(Updater::getLatestVersion());
-    dump(Updater::update());
-});
+    return Updater::update();
+})->name("update");
 
 require __DIR__.'/auth.php';
