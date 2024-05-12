@@ -34,7 +34,8 @@ Route::get("/mail", function () {
 });
 
 Route::get('update', function () {
-    return Updater::update();
+    $update_result = Updater::update();
+    return redirect()->route('dashboard')->with('update_result', $update_result);
 })->name("update");
 
 require __DIR__.'/auth.php';
