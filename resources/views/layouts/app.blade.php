@@ -76,6 +76,8 @@
                 {{-- INFO: this done through checking if tenant is null --}}
                 @if (is_null(tenant('id')))
                     <x-mary-menu-item title="Tenants" icon="o-users" link="{{ route('tenants.index') }}" />
+                    <x-mary-menu-item title="Experimental" icon="iconpark.experiment-o"
+                        link="{{ route('experimentals.index') }}" />
                 @endif
             </x-mary-menu>
         </x-slot:sidebar>

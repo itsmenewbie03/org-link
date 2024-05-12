@@ -11,7 +11,7 @@
                 dismissible />
         @endif
         {{-- NOTE: we will only check for updates if were on the dashboard route of the central app --}}
-        @if (is_null(tenant('id')))
+        @if (is_null(tenant('id')) && Updater::getCurrentVersion() != 'main')
             @if (Route::current()->getName() === 'dashboard')
 
                 @if (session()->has('update_result'))
@@ -43,7 +43,8 @@
                 </ul>
             </div>
             @if (is_null(tenant('id')))
-                <x-mary-header title="OrgLink" subtitle="{{ Updater::getCurrentVersion() }}">
+                <x-mary-header title="OrgLink"
+                    subtitle="{{ Updater::getCurrentVersion() == 'main' ? 'Bleeding Edge' : Updater::getCurrentVersion() }}">
                     <x-slot:middle class="!justify-end">
                         <x-mary-input icon="o-magnifying-glass" placeholder="Search..." />
                     </x-slot:middle>
