@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-l <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Dashboard') }}
@@ -31,17 +31,48 @@
         @endif
 
         @sectionMissing('content')
-            <x-mary-header title="OrgLink" subtitle="{{ Updater::getCurrentVersion() }}">
-                <x-slot:middle class="!justify-end">
-                    <x-mary-input icon="o-magnifying-glass" placeholder="Search..." />
-                </x-slot:middle>
-                <x-slot:actions>
-                    <x-mary-button icon="o-funnel" />
-                    <x-mary-button icon="o-plus" class="btn-primary" />
-                </x-slot:actions>
-            </x-mary-header>
+            <div class="text-lg breadcrumbs">
+                <ul>
+                    <li><x-mary-icon name="o-computer-desktop" label="Dashboard" /></li>
+                </ul>
+            </div>
+            @if (is_null(tenant('id')))
+                <x-mary-header title="OrgLink" subtitle="{{ Updater::getCurrentVersion() }}">
+                    <x-slot:middle class="!justify-end">
+                        <x-mary-input icon="o-magnifying-glass" placeholder="Search..." />
+                    </x-slot:middle>
+                    <x-slot:actions>
+                        <x-mary-button icon="o-funnel" />
+                        <x-mary-button icon="o-plus" class="btn-primary" />
+                    </x-slot:actions>
+                </x-mary-header>
+            @else
+                <x-mary-header title="{{ tenant('organization_name') }}" subtitle="Welcome, {{ auth()->user()->name }}">
+                    <x-slot:middle class="!justify-end">
+                        <x-mary-input icon="o-magnifying-glass" placeholder="Search..." />
+                    </x-slot:middle>
+                    <x-slot:actions>
+                        <x-mary-button icon="o-funnel" />
+                        <x-mary-button icon="o-plus" class="btn-primary" />
+                    </x-slot:actions>
+                </x-mary-header>
+            @endif
+            <div class="flex gap-4">
+
+                <x-mary-stat title="Messages" value="44" icon="o-envelope" tooltip="Hello" />
+
+                <x-mary-stat title="Sales" description="This month" value="22.124" icon="o-arrow-trending-up"
+                    tooltip-bottom="There" />
+
+                <x-mary-stat title="Lost" description="This month" value="34" icon="o-arrow-trending-down"
+                    tooltip-left="Ops!" />
+
+                <x-mary-stat title="Sales" description="This month" value="22.124" icon="o-arrow-trending-down"
+                    class="text-orange-500" color="text-pink-500" tooltip-right="Gosh!" />
+            </div>
         @else
             @yield('content')
         @endif
     </div>
-</x-app-layout>
+    </x-app-layout>
+    ayout>
